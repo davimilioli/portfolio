@@ -1,8 +1,8 @@
 aside{
     height: 100vh;
-    background: #212121;
+    background: var(--secondary-color);;
     width: 100%;
-    max-width: 225px;
+    max-width: 130px;
     min-width: 60px;
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@ aside{
 
             &.active, &:hover{
                 background: #FFF;
-                color: var(--primary-color);
+                color: var(--secondary-color);
                 transition: .3s;
             }
         }
