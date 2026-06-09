@@ -33,10 +33,18 @@ export default function ContactForm() {
     const [input, setInput] = useState('');
     const [inputErr, setInputErr] = useState('');
     const [values, setValues] = useState({ firstName: '', email: '', message: '' });
+    
     const [messages, setMessages] = useState<ChatMessage[]>(() => [
-        { id: 'init', type: 'bot', text: steps[0].question, time: getTime() },
+        { id: 'init', type: 'bot', text: steps[0].question, time: '' },
     ]);
+    
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+    useEffect(() => {
+        setMessages(prev => 
+            prev.map(msg => msg.id === 'init' ? { ...msg, time: getTime() } : msg)
+        );
+    }, []);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
