@@ -13,6 +13,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Davi Milioli - Desenvolvedor Web",
   description: "Sou um desenvolvedor web dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.",
+  themeColor: '#6366F1',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
