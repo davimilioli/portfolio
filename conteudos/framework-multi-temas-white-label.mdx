@@ -1,0 +1,479 @@
+export const metadata = {
+    id: 7,
+    name: 'Framework Multi-Temas White-Label',
+    category: 'app-web',
+    technologies: ['NextJs', 'React', 'TypeScript', 'Tailwind', 'MCP', 'Figma', 'Antigravity', 'Claude'],
+}
+
+Migração e reestruturação de uma grande plataforma imobiliária white-label para Next.js e TypeScript, separando o sistema em um pacote NPM privado que centraliza as regras de negócio e um template de tema com sobrescrita por cliente. Todo o processo entendimento do legado, migração de código, criação de componentes e depuração foi conduzido com forte apoio de IA.
+
+A transição utilizou três MCPs em conjunto, cada um especializado em uma etapa do processo. Para padronizar essas tarefas e acelerar o trabalho do agente de IA, também criei skills customizadas para cada etapa do projeto, o conteúdo de cada uma está disponível ao lado, com a opção de copiar e usar no seu próprio fluxo.
+
+A estrutura interna do pacote core (`fw-core`) foi modelada seguindo os princípios de arquitetura limpa, organizando a base de código de maneira altamente modular e testável. As responsabilidades são divididas em **services** especializados (como busca de imóveis e filtros), **mappers** encarregados de formatar e converter os payloads brutos das APIs para os formatos ideais exigidos pelas interfaces de usuário, e definições rigorosas de **types** do TypeScript para garantir a integridade dos dados e tipagem estática em todo o ecossistema.
+
+No lado do template (`template`), a integração com o core ocorre de forma direta consumindo esses serviços e mappers para alimentar as vitrines e componentes de interface. Essa separação garante que, mesmo que o cliente necessite de layouts e componentes visuais inteiramente customizados, o fluxo de dados e as regras de negócio permaneçam intactos e centralizados no pacote NPM, simplificando manutenções e atualizações globais de maneira escalável.
+
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+<div>
+
+## MCPs Utilizados
+
+<div className="grid grid-cols-1 gap-3">
+
+<McpCard name="GitHub MCP" href="https://github.com/github/github-mcp-server" description="Usado para mapear as regras de negócio do sistema legado direto nos repositórios, automatizar a movimentação de arquivos entre o pacote NPM e os templates de tema, além de estruturar o contexto arquitetural do projeto para guiar o agente de IA." />
+
+<McpCard name="Figma MCP" href="https://www.figma.com/blog/introducing-figma-mcp-server/" description="Usado para ler variáveis, estilos e layouts diretamente dos designs do Figma e gerar componentes React/TypeScript fiéis ao design, em conjunto com a skill Figma Pixel Perfect." />
+
+<McpCard name="Next.js DevTools MCP" href="https://github.com/vercel/next-devtools-mcp" description="Usado para depurar rotas, cache e performance em tempo real durante o desenvolvimento, permitindo identificar problemas de renderização direto no servidor de desenvolvimento." />
+
+</div>
+
+</div>
+
+<div>
+
+## Skills Utilizadas
+
+<div className="grid grid-cols-1 gap-3">
+
+<SkillCard name="Figma Pixel Perfect" description="Skill usada na etapa de design-to-code: traduz designs do Figma em componentes React/Tailwind com fidelidade milimétrica de espaçamento, cores, tipografia e layout, mapeando os valores do Figma para a escala nativa do Tailwind.">
+
+````markdown
+---
+trigger: always_on
+---
+
+---
+name: Figma Pixel Perfect
+description: Guia de implementação técnica para seguir designs do Figma com fidelidade absoluta em espaçamento, cores, tipografia e layout.
+---
+
+# Figma Pixel Perfect Skill
+
+Esta habilidade instrui o agente a traduzir designs do Figma para código com precisão milimétrica, garantindo que o resultado final seja uma réplica exata do design original.
+
+## Regras de Implementação Tailwind + React
+1.**Unidades e Escala**: **PROIBIDO** o uso de valores arbitrários com colchetes (ex: p-[`17px`]). Você deve obrigatoriamente mapear os pixels do Figma para a classe nativa mais próxima da escala do Tailwind (multiplos de 4px).
+   10px → `2.5`
+   14px → `3.5` (ou `sm` para texto)
+   16px → `4`
+   60px → `15` (ou `14`/`16` se não houver 15)
+2. **Componentização**: Transforme frames de nível superior em componentes React funcionais (`const Component = () => { ... }`).
+3. **Imagens**: Use o componente `next/image` para todos os elementos de imagem detectados.
+4. **Cores**: Mapeie os Hex codes do Figma para a configuração `site.css`. Se não houver mapeamento, use `cor-do-tailwind`.
+5. **Flex/Grid**: Traduza o "Auto Layout" do Figma diretamente para `flex`, `flex-col`, `items-center`, `justify-between` ou `grid-cols-12`.
+
+## Princípios de Fidelidade
+
+### 1. Espaçamentos e Dimensões
+- **Precisão**: Use exclusivamente as classes pré-definidas da escala do Tailwind (ex: `p-4`, `m-6`, `gap-5`).
+- **Inspeção**: Sempre verifique a distância entre elementos segurando `Alt/Option` no Figma ou usando o painel "Inspect".
+- **Padding e Margin**: Aplique os valores exatos de preenchimento e margem observados nos containers.
+- **Gaps**: Em layouts Flexbox ou Grid, use a propriedade `gap` idêntica ao espaçamento entre itens no Figma.
+
+### 2. Cores e Estilos Visuais
+- **Códigos de Cores**: Utilize valores como `primary-color`, `secondary-color`, etc.
+- **Opacidade**: Verifique tanto a opacidade da camada quanto a opacidade da cor de preenchimento.
+- **Gradientes**: Copie os stops e ângulos exatos dos gradientes lineares ou radiais.
+- **Efeitos**: Transcreva `box-shadow` (X, Y, Blur, Spread, Color) e `backdrop-filter` usando classes do tailwind (ex: `shadow-lg`, `backdrop-blur-md`).
+- **Bordas**: Siga rigorosamente o `border-width`, `border-color` e, crucialmente, o `border-radius` usando classes do tailwind (ex: `border-2`, `border-color-primary`, `rounded-lg`).
+
+### 3. Tipografia
+- **Propriedades Modernas**:
+    - `font-family`: Use a fonte exata (verifique se está carregada no projeto).
+    - `font-size`: O tamanho deve ser idêntico. (ex: `16px` -> `text-base`).
+    - `font-weight`: Mapeie nomes (Regular, Bold) para valores numéricos (`400`, `500`, `600`, etc).
+    - `line-height`: Use valores em `leading-(numero)` para replicar a altura da linha do design.
+    - `letter-spacing`: Converta o valor de `tracking` do Figma (geralmente em %) para `tracking-(numero)`.
+- **Suavização**: Utilize `transition-all` se necessário para igualar o render do Figma.
+
+### 4. Layout e Posicionamento
+- **Fidelidade de Posição**: Em componentes com posicionamento absoluto, garanta que `top`, `bottom`, `left` e `right` sejam idênticos.
+- **Alinhamento**: Verifique se o alinhamento de texto (esquerda, centro, direita) coincide.
+- **Z-Index**: Respeite a hierarquia de camadas para sobreposições.
+
+## Prevenção de Erros e Alucinações
+
+Para evitar discrepâncias entre o design e a implementação, o agente deve seguir estas regras rigorosas:
+
+1. **Protocolo de Comentários (Auditoria)**: AAo converter um valor do Figma, indique a lógica de arredondamento para a escala nativa.
+   - Exemplo: `p-4 /* Figma: 17px -> Aproximação nativa 16px */`
+   - Exemplo: `text-sm /* Figma: 14px -> Equivalente nativo */`
+2. **Proibição de Chute (Hallucination Guard)**:
+   - Se o valor no Figma for ambíguo (ex: `15.98px`), procure por padrões do tailwind css antes de arredondar.
+   - Nunca assuma que uma cor "quase preta" é `#000000`. Verifique o valor hex exato.
+   - Se um valor estiver faltando ou for impossível de ler, **PARE** e peça clarificação ao usuário.
+3. **Consistência de Unidades**: Use sempre as classes do tailwind css para implementar os valores do Figma.
+4. **Pensamento em Escala (Design System)**:
+
+- Entenda que o Tailwind é um Design System, não apenas um substituto para CSS.
+- Se o Figma diz `rounded-[12px]`, use `rounded-xl`.
+- Se o Figma diz `rounded-[95px]`, use `rounded-full`.
+- Nunca use colchetes `[]` para propriedades que possuem equivalentes nativos.
+
+## Checklist de Auto-Validação (Mandatário)
+
+Antes de considerar uma tarefa de UI como concluída, o agente deve verificar mentalmente:
+
+- [ ] **Distâncias**: O `gap` e `padding` estão exatamente como no Figma?
+- [ ] **Cores**: Usei os Hex codes exatos (incluindo opacidade)?
+- [ ] **Tipografia**: O `line-height` e `letter-spacing` foram aplicados? Eles fazem o bloco de texto ocupar o mesmo espaço visual?
+- [ ] **Bordas**: O `border-radius` está idêntico? (Arredondamentos sutis fazem muita diferença na percepção de qualidade).
+- [ ] **Sombras**: A profundidade da sombra (`blur` e `spread`) condiz com a elevação no design?
+- [ ] **Alinhamento**: Itens em containers Flex/Grid estão alinhados exatamente no mesmo eixo (center, start, end)?
+
+## Fluxo de Trabalho Recomendado
+
+1. **Análise Inicial**: Observe o layout geral e identifique padrões de design system (tokens de cor, escalas de tipografia).
+2. **Inspeção Detalhada**: Clique em cada elemento para ver as propriedades no painel "Inspect".
+3. **Mapeamento de CSS**:
+   - Crie/Use variáveis CSS para cores e espaços recorrentes.
+   - Implemente primeiro a estrutura (HTML semântico).
+   - Aplique os estilos de layout (Flex/Grid).
+   - Refine os detalhes (espaçamentos internos, bordas, sombras).
+4. **Auto-Revisão**: Compare o código renderizado com o Figma lado a lado para detectar discrepâncias visuais, seguindo o checklist acima.
+
+## Exceções e Bom Senso
+- Se um valor de espaçamento parecer um erro de arredondamento no Figma (ex: 15.98px), use o valor inteiro mais próximo (16px).
+- Se houver tokens globais definidos no projeto (ex: `var(--spacing-md)`), priorize o uso do token se ele for idêntico ao valor do Figma.
+````
+
+</SkillCard>
+
+<SkillCard name="PageSpeed Optimization (SEO & Acessibilidade)" description="Skill usada para elevar Acessibilidade e SEO a 100% no Lighthouse: injeta atributos aria-label, corrige a hierarquia de headings e aplica tags HTML5 semânticas sem alterar os estilos ou a lógica existente dos componentes.">
+
+````markdown
+---
+name: PageSpeed Optimization (SEO & Accessibility)
+description: Guia técnico estrito para refatoração semântica e acessibilidade em componentes React/Next.js focando em nota 100% no Lighthouse.
+---
+
+# PageSpeed Optimization Skill
+
+Esta habilidade instrui o agente a atuar como um Engenheiro Frontend Sênior especialista em Next.js (App Router), Tailwind CSS e otimização para PageSpeed Insights (Lighthouse), focado em elevar as notas de Acessibilidade e SEO para 100%.
+
+## Limitação de Escopo (Foco e Velocidade)
+
+- **FOQUE EXCLUSIVAMENTE nos códigos contidos dentro do diretório `src/themes/default/`.** Ignore categoricamente qualquer outro arquivo ou pasta raiz do projeto para garantir respostas rápidas, economizar tokens e evitar processamento desnecessário.
+
+## Diretrizes Estritas de Otimização
+
+O agente deve analisar o JSX/TSX fornecido e injetar as seguintes correções sem quebrar lógicas de negócio ou estilizações:
+
+### 1. Regras para ACESSIBILIDADE (Lighthouse)
+- **Elementos Interativos sem Texto**: Botões de fechar, setas de slider, botões de busca com apenas ícones e links de redes sociais devem conter obrigatoriamente um atributo `aria-label` descritivo e claro (ex: `aria-label="Fechar menu"`, `aria-label="Avançar slide"`).
+- **Links Discerníveis**: Links (`<a>` ou `<Link>`) que envelopam apenas ícones ou imagens devem usar um `aria-label` ou um `<span>` oculto com a classe Tailwind `sr-only` descrevendo o destino do link.
+- **Formulários e Inputs**: Inputs, selectores e textareas precisam de uma tag `<label>` associada via `htmlFor` casando com o `id` do elemento. Se o layout do Figma não previr label visível, aplique a classe `sr-only` no `<label>`.
+- **Estados de Interação**: Elementos dinâmicos abertos via estado (modais, menus dropdown, drawers) devem conter atributos dinâmicos como `aria-expanded={isOpen}`, `aria-haspopup="true"` ou `aria-hidden={!isOpen}` nos elementos correspondentes.
+
+### 2. Regras para SEO e SEMÂNTICA
+- **Tags Semânticas HTML5**: Substitua containers genéricos baseados puramente em `<div>` por tags estruturais adequadas ao contexto do componente (ex: `<main>`, `<section>`, `<article>`, `<aside>`, `<nav>`, `<header>`, `<footer>`).
+- **Hierarquia de Títulos**: Corrija a árvore de headings garantindo ordem lógica (`<h1>` -> `<h2>` -> `<h3>`). Nunca pule níveis na árvore semântica.
+- **Acessibilidade de Mídia**: Garanta que todas as tags `<img>`, `<Image>` (Next.js) ou `<SmartImage>` possuam o atributo `alt` preenchido com descrições reais e textuais da imagem. Proíba valores genéricos como `"imagem"`, `"foto"` ou strings vazias.
+
+### 3. Integridade do Código e Estilo
+- **Preservação de Estilo**: Não altere ou remova as classes do Tailwind CSS existentes, a menos que explicitamente instruído ou para injetar estados de foco acessível necessários (ex: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-color`).
+- **Preservação de Lógica**: Mantenha intactos todos os tipos do TypeScript, Hooks (`useState`, `useEffect`, etc.), funções internas e chamadas de APIs. O trabalho é estritamente de refatoração na camada estrutural do JSX/TSX entregue ao navegador.
+
+## Formato de Resposta Exigido
+
+Ao realizar a refatoração do componente, a resposta deve seguir rigorosamente a seguinte estrutura:
+
+1. **Código Refatorado**: O código completo e limpo do componente atualizado, pronto para substituição.
+2. **Relatório de Modificações**: Uma lista breve em tópicos detalhando o que foi alterado:
+   - *Correções de Acessibilidade:* [Listar elementos que receberam aria-label, labels, etc.]
+   - *Correções de SEO & Semântica:* [Listar tags alteradas e lógica de headings/alts aplicada]
+
+## Checklist de Auto-Validação
+
+Antes de entregar o componente otimizado, o agente deve garantir internamente:
+- [ ] O componente analisado pertence estritamente à pasta `src/themes/default/`?
+- [ ] Nenhum texto descritivo de `aria-label` ou `sr-only` ficou genérico ou em branco?
+- [ ] Todos os inputs do componente possuem um `<label>` correspondente com `htmlFor`?
+- [ ] A lógica de código, states e tipagens continua idêntica à original enviada pelo usuário?
+````
+
+</SkillCard>
+
+<SkillCard name="Theme Setup & Home Assembler" description="Skill usada para inicializar novos clientes white-label: clona a pasta de tema padrão, configura as variáveis de CSS (incluindo o cálculo automático da cor de hover) e monta a Home a partir de um catálogo de componentes homologados.">
+
+````markdown
+---
+name: Theme Setup & Home Assembler
+description: Skill unificada para inicialização de novos clientes white-label, configuração completa de estilos (custom.css) e montagem rápida da Home Page.
+---
+
+# Theme Setup & Home Assembler Skill
+
+Esta habilidade instrui o agente a inicializar a estrutura de novos clientes, configurar variáveis globais de estilo (CSS Variables) seguindo rigorosamente o padrão do sistema, e reorganizar a página inicial utilizando o catálogo de componentes homologados.
+
+## Limitação de Escopo (Foco e Velocidade)
+
+- **FOQUE EXCLUSIVAMENTE nos códigos contidos dentro do diretório `src/themes/`.** Ignore qualquer outro arquivo ou pasta raiz do projeto para garantir respostas rápidas, economizar tokens e evitar processamento desnecessário.
+
+## CONTEXTO CRÍTICO: Bloqueio da Pasta Default
+
+- **A pasta `src/themes/default/` é o CORE global do sistema.** Ela recebe atualizações constantes de segurança, performance e novas funcionalidades.
+- **É STRICTAMENTE PROIBIDO realizar qualquer modificação, alteração de código ou escrita direta dentro da pasta `src/themes/default/`.**
+- Toda e qualquer modificação (seja de arquivos ou CSS) deve acontecer apenas dentro da pasta específica do cliente (ex: `src/themes/[nome-do-cliente]-[ano]/`).
+
+## Protocolo de Setup Inicial (Novo Cliente)
+
+Quando o usuário iniciar um novo projeto fornecendo o **Nome do Cliente + Ano** (Ex: `imob-2026`), você deve obrigatoriamente seguir e documentar estes passos de infraestrutura:
+
+1. **Clonagem e Renomeação da Pasta**: Declare a renomeação da pasta genérica `custom` para a pasta final do cliente.
+   - *Ação:* Renomear a pasta `src/themes/custom/` para `src/themes/[nome-do-cliente]-[ano]/`.
+2. **Cópia do Arquivo Base de Estilos**: Transfira a folha de estilos base do core global para a nova estrutura de escrita permitida do cliente.
+   - *Origem:* `src/themes/default/assets/css/custom.css`
+   - *Destino:* `src/themes/[nome-do-cliente]-[ano]/assets/css/custom.css`
+
+## Regras de Geração do Arquivo `custom.css`
+
+Ao receber a paleta de cores fornecida pelo usuário, atualize ou crie o escopo das variáveis root (`:root`) dentro do arquivo `custom.css` do cliente seguindo estas regras rigorosas:
+
+1. **Cálculo de Hover Automático (`--primary-color-hover`)**:
+   - Analise o Hex code enviado para a cor primária e **gere matematicamente uma variante 10% a 15% mais escura** para atuar como o estado hover, caso ela não tenha sido passada de forma explícita.
+2. **Manutenção de Escopo (Não-Mencionados)**:
+   - Se o usuário **não** mencionar a cor de um bloco ou elemento específico (Ex: omitir a cor do `header` ou do `footer`), **NÃO mude nem invente esse valor**. Deixe-o intocado conforme o arquivo herdado da pasta `default`.
+3. **Mapeamento do Padrão do Sistema**: Quando as cores forem injetadas, elas devem seguir rigorosamente esta estrutura de nomenclatura do design system:
+
+```css
+:root {
+  /* primary */
+  --primary-color: #00b074;
+  --primary-color-hover: #029e69;
+  --primary-dark: #00b074;
+  --primary-contrast: #ffffff;
+  --secondary: #000000;
+
+  /* header */
+  --header-bg: #ffffff;
+  --header-item: #444444;
+  --header-item-hover: var(--primary-color);
+
+  --header-favoritos: #444444;
+  --header-favoritos-hover: var(--primary-color);
+
+  --header-vendas-bg: #444444;
+  --header-vendas-text: var(--primary-contrast);
+  --header-vendas-hover-bg: var(--primary-dark);
+  --header-vendas-hover-text: var(--primary-contrast);
+
+  --header-menu-hidden-bg: #ffffff;
+  --header-menu-hidden-item: var(--primary-contrast);
+  --header-menu-hidden-item-bg: var(--primary-color);
+
+  --header-submenu-bg: #333333;
+  --header-submenu-item: #000000;
+  --header-submenu-item-hover: var(--primary-color);
+
+  /* footer */
+  --footer-bg: #26272b;
+  --footer-item: #ffffff;
+  --footer-item-hover: #cccccc;
+}
+
+```
+
+## Regra de Ouro: Isolamento e Customização (Overrides)
+
+Se a solicitação envolver **editar o código interno de um componente** (e não apenas mudar a ordem dele na Home), você deve aplicar o protocolo de *Override*:
+
+1. **Clonagem de Arquivo**: Copie o componente intacto da pasta padrão e simule a criação dele na pasta específica do cliente.
+* *Origem (Apenas Leitura):* `src/themes/default/home/components/[Caminho-do-Componente]`
+* *Destino (Escrita Permitida):* `src/themes/[nome-do-cliente]-[ano]/home/components/[Caminho-do-Componente]`
+
+
+2. **Atualização de Import na Home**: No arquivo `page.tsx` da Home do cliente, altere o caminho do `import` daquele componente para apontar para a pasta do cliente através do alias do projeto, garantindo que a Home use a versão customizada e não a padrão.
+3. **Escopo da Resposta**: Forneça primeiro o código completo do componente modificado (com as alterações solicitadas) indicando o caminho de destino dele, e em seguida o código do `page.tsx` atualizado com o novo import.
+
+## Regras de Montagem Geral da Home
+
+1. **Uso Exclusivo do Catálogo**: É **PROIBIDO** inventar novos componentes de seção. Todas as estruturas da Home devem ser montadas utilizando estritamente os componentes listados no catálogo abaixo.
+2. **Importações Corretas**: Ao adicionar ou mover um componente, certifique-se de atualizar os `imports` no topo do arquivo `page.tsx`. O alias `@/home/...` resolve os caminhos. Certifique-se de apontar corretamente para a pasta do cliente nos componentes editados.
+3. **Limpeza de Código**: Remova sumariamente qualquer componente ou `import` que tenha sido retirado da nova estrutura da Home para evitar sujeira no bundle.
+
+## Catálogo de Componentes Homologados
+
+### 1. Banners e Destaques Principais
+
+* `<MainBanner size="default | full" />`: Localizado em `@/home/components/banner/MainBanner`. Banner principal com carrossel/imagem e o formulário `HomeSearchForm`.
+* `<BannerCenter size="default | full" />`: Localizado em `@/home/components/banner-center/BannerCenter`. Banner intermediário de meio de página.
+* `<PropertySuggestion />`: Localizado em `@/home/components/PropertySuggestion`. Bloco de duas colunas (texto/CTA à esquerda, imagem à direita).
+
+### 2. Navegação e Conversão Rápida
+
+* `<CanIHelp />`: Localizado em `@/home/components/CanIHelp`. Seção "O que você procura?" com 5 cards fixos de atalhos.
+* `<HowToBuy />`: Localizado em `@/home/components/HowToBuy`. Bloco explicativo com 4 passos fixos sobre a jornada de compra.
+* `<SellWithUs />`: Localizado em `@/home/components/SellWithUs`. Seção de captação de proprietários com 3 diferenciais e imagem.
+
+### 3. Vitrines e Dados Dinâmicos
+
+* `<ExploreRegions />`: Localizado em `@/home/components/ExploreRegions`. Vitrine em carrossel que puxa os bairros activos via `getBairros`.
+* `<VitrineImovel isDestaque={true | false} />`: Localizado em `@/home/components/VitrineImovel`. Wrapper de listagem de imóveis. A prop `isDestaque` aplica fundo diferenciado (padrão: `bg-secondary`).
+* `<VitrineBlog title="..." subtitle="..." buttonText="..." />`: Localizado em `@/home/components/vitrine-blog/VitrineBlog`. Bloco com os 3 posts mais recentes do blog.
+* `<CloudTags />`: Localizado em `@/home/components/CloudTags`. Grid de 3 colunas aglutinando tags de busca por bairro via `getCloudTags`.
+* `<LastSearch />`: Localizado em `@/home/components/LastSearch`. Componente client-side (TrackManager).
+
+## Checklist de Conclusão de Tarefa
+
+Antes de entregar os códigos gerados, verifique de forma obrigatória:
+
+* [ ] A análise restringiu-se estritamente à pasta `src/themes/`?
+* [ ] **Nenhum** arquivo dentro de `src/themes/default/` foi modificado diretamente?
+* [ ] O script de resposta deixa explícita a renomeação da pasta `custom` para `[nome-do-cliente]-[ano]`?
+* [ ] O arquivo `custom.css` do cliente contém o cálculo inteligente de Hover (Primary Color mais escura)?
+* [ ] As propriedades do header/footer omitidas pelo usuário foram mantidas intactas no CSS?
+* [ ] Os `imports` no `page.tsx` refletem o caminho correto usando o padrão do alias `@/home/...`?
+````
+
+</SkillCard>
+
+</div>
+
+</div>
+
+</div>
+
+## Desenvolvimento Assistido por IA com MCP
+
+Os MCPs de Figma e GitHub foram essenciais durante a migração: o primeiro garante a fidelidade do Design System ao gerar componentes a partir dos tokens do Figma; o segundo permite que a IA navegue pelo repositório legado, siga os imports entre arquivos e extraia as regras de negócio originais. Abaixo, veja uma simulação de como interajo com a IA em cada um desses fluxos:
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+
+<FigmaChatDemo />
+
+<GithubChatDemo />
+
+</div>
+
+Além disso, a criação e o uso de um arquivo de contexto de projeto (como o `project-context.md`) consolidou toda a arquitetura, regras de negócio e visão geral do sistema em um único documento. Esse arquivo atua como um mapa de referência rápido para a IA, eliminando a necessidade de varreduras extensivas e garantindo que o agente compreenda instantaneamente o propósito do projeto antes de iniciar qualquer tarefa.
+
+<div className="max-w-xl mb-6">
+<SkillCard name="Contexto do Projeto" buttonLabel="Ver contexto em Markdown" description="Arquivo de contexto utilizado para alimentar a IA com as regras de negócio, a visão geral e a arquitetura unificada de ambos os módulos (fw-core e template).">
+
+````markdown
+# Contexto Unificado do Projeto: Framework Multi-Temas White-Label
+
+> **Nota de Contexto:** Este arquivo de contexto foi utilizado ativamente durante o desenvolvimento do projeto para alimentar a IA com as regras, visão geral e arquitetura unificada, garantindo precisão nas implementações e evitando alucinações.
+
+Este documento consolida a arquitetura, regras de negócio e estrutura técnica do ecossistema white-label imobiliário da Inforce. O ecossistema é composto logicamente por dois módulos integrados que funcionam como um único projeto:
+
+1. **Módulo Core (`fw-core`)**: Pacote NPM privado que envelopa as regras de negócio pesadas, tipos, mapeadores de dados e consumo de APIs.
+2. **Módulo de Apresentação (`template`)**: Boilerplate Next.js multi-temas que consome o core para gerar sites customizados por cliente.
+
+---
+
+## Tecnologias Utilizadas (Stack)
+
+- **Linguagem Base**: TypeScript (Tipagem estática estrita em ambos os módulos)
+- **Camada do Core (`fw-core`)**:
+  - React 19 (Hooks e Contextos para gerenciamento de estado)
+  - Node.js (Ambiente de execução)
+- **Camada do Template**:
+  - Next.js 16 (App Router, Server & Client Components)
+  - Tailwind CSS v4 (Estilização base e variáveis de tema CSS)
+  - Zustand (Gerenciamento de estado leve para o frontend)
+  - React Hook Form & Zod (Validação de formulários de leads e buscas)
+  - Leaflet / React-Leaflet (Mapas interativos de imóveis)
+  - Swiper (Carrosséis de imagens e vitrines)
+
+---
+
+## Arquitetura do Sistema
+
+O projeto é dividido em duas partes principais: a **Apresentação (Template)** e o **Core (Lógica)**.
+
+### Estrutura e Responsabilidades
+
+```text
+projeto-unico/
+├── template/                            --> Camada Visual (Next.js App Router)
+│   ├── config/config.json               --> Define qual tema/cliente está ativo
+│   └── src/themes/
+│       ├── default/                     --> Tema padrão (componentes e estilos base)
+│       └── [nome-do-cliente]/           --> Estilos e componentes customizados do cliente
+│
+└── fw-core/                             --> Camada de Dados e Regras (Pacote NPM)
+    ├── core/services/                   --> Regras de negócio e fluxos (busca, leads)
+    ├── core/queries/                    --> Exporta métodos de consulta para o frontend usar
+    ├── core/mappers/                    --> Mapeadores de dados bruto para a UI
+    └── core/types/                      --> Tipagens estáticas do TypeScript
+```
+
+### Como a Integração Funciona
+
+1. **Consumo de Lógica**: Os componentes dentro de `template` importam as funções de busca, serviços e tipos diretamente do `fw-core`.
+2. **Seleção de Temas**: O Next.js lê o `config.json` para carregar as páginas e componentes a partir da pasta do cliente ativo (`src/themes/[nome-do-cliente]/`).
+
+---
+
+## 1. Módulo Core (`fw-core`)
+
+Responsável pela integridade dos dados e comunicação com as APIs externas da Inforce. Ele garante que toda e qualquer regra do mercado imobiliário (como filtros de busca, envio de leads e paginações) seja centralizada e mantida em um único lugar.
+
+### Estrutura de Diretórios
+- `core/services/`: Concentra a lógica de fluxos de dados e interações mais complexas (como envio de formulários e buscas dinâmicas).
+- `core/queries/`: Exporta os métodos de consulta que o frontend consome diretamente para obter dados (como imóveis, vitrines, menus, etc.). Exemplos: `menu.query`, `vitrine.query`, `imovel.query`, `robots.query`.
+- `core/mappers/`: Conversores especializados de dados. Transformam a resposta bruta da API (payload legado) na interface tipada ideal exigida pelas telas do Next.js.
+- `core/types/`: Definições rigorosas e centralizadas de TypeScript (`imovel.types`, `anuncio.types`, `vitrine.types`, etc.).
+- `core/hooks/` e `core/contexts/`: Hooks e estados globais React compartilhados entre todas as instâncias de temas (Ex: trackings de busca e favoritos).
+
+---
+
+## 2. Módulo de Apresentação (`template`)
+
+Boilerplate em Next.js (App Router) e Tailwind CSS que consome a biblioteca do Core para renderizar as interfaces.
+
+### Estrutura de Diretórios
+- `src/themes/default/`: O core visual do produto. Contém a Home original, componentes gerais (Header, Footer, Banners), assets e estilos base homologados.
+- `src/themes/[nome-do-cliente]/`: Pasta exclusiva de customização do cliente. Contém os arquivos de layout, estilos e componentes específicos do cliente.
+- `config/config.json`: Controla qual tema o ambiente de desenvolvimento/produção irá rodar.
+  ```json
+  {
+    "theme": "nome-do-cliente"
+  }
+  ```
+
+---
+
+## Diretrizes e Regras de Ouro para Desenvolvimento (IA e Humanos)
+
+Para manter o ecossistema escalável e livre de bugs, siga rigorosamente as regras abaixo:
+
+### 1. Modificação do Produto Base (Global)
+- Qualquer alteração que beneficie todos os clientes deve ser feita exclusivamente na pasta `src/themes/default/`.
+- **Atenção:** Alterações no `default` afetam todos os sites do ecossistema que utilizam as definições base do produto.
+
+### 2. Customização por Cliente (Isolamento)
+- **Nunca modifique** os arquivos em `src/themes/default/` para atender especificidades de um único cliente.
+- As customizações visuais e de estilo de cada cliente devem ser desenvolvidas dentro de sua respectiva pasta (`src/themes/[cliente]/`), garantindo isolamento total entre os clientes.
+
+### 3. Gerenciamento de Estilos com Tailwind & CSS
+- A folha de estilos específica do cliente (`custom.css`) fica na pasta do cliente: `src/themes/[cliente]/assets/css/custom.css`.
+- Ela define variáveis do CSS (`:root`) para alterar o design system sem tocar na estrutura do código:
+  - `--primary-color`: Cor principal definida pelo cliente.
+  - `--primary-color-hover`: Variante 10% a 15% mais escura gerada automaticamente para os estados de hover.
+- Elementos não mencionados nas instruções do cliente devem manter as variáveis e comportamentos herdados do padrão.
+
+### 4. PageSpeed, SEO e Acessibilidade (Lighthouse 100%)
+- Todos os componentes gerados devem usar tags semânticas do HTML5 (`<main>`, `<header>`, `<footer>`, `<section>`).
+- Garanta atributos `aria-label` descritivos em botões interativos compostos apenas por ícones (Ex: botões de fechar, sliders, redes sociais).
+- Mantenha imagens (`<img>`, Next.js `<Image>`) com a propriedade `alt` descritiva e real.
+
+---
+
+## Comandos Comuns de Desenvolvimento
+
+No diretório do `template`:
+- `npm install`: Instala as dependências (incluindo o core via GitHub NPM Registry).
+- `npm run dev`: Inicia o servidor local Next.js consumindo a configuração do tema ativo.
+- `npm run build`: Compila a build de produção otimizada para o tema configurado.
+````
+
+</SkillCard>
+</div>
+
+Ao mencionar a skill ou apontar o arquivo diretamente no prompt, evitamos alucinações da IA e garantimos que o código (ou a especificação) gerado respeite rigorosamente o padrão do projeto.
