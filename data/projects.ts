@@ -113,6 +113,22 @@ const projectsData: Project[] = [
         ],
         technologies: ['NextJs', 'React', 'Tailwind'],
     },
+    {
+        id: 6,
+        name: 'Paulo & Martins Consultoria',
+        img: ['/projetcs/pauloemartins.png'],
+        description: 'Site institucional desenvolvido para a Paulo & Martins Consultoria, especializada em assessoria em licitações e contratos públicos. O projeto apresenta as modalidades de atuação e os serviços da empresa com foco em credibilidade e alta performance.',
+        preview: 'https://www.pauloemartinsconsultoria.com.br/',
+        category: 'website',
+        features: [
+            'Apresentação de serviços e modalidades de licitação',
+            'Seção de perguntas frequentes (FAQ) interativa',
+            'Otimização de SEO e performance de carregamento',
+            'Estrutura de dados Schema.org (JSON-LD) para melhor ranqueamento',
+            'Design responsivo com foco em usabilidade',
+        ],
+        technologies: ['NextJs', 'React', 'Tailwind', 'TypeScript'],
+    },
 ];
 
 export const projects: Project[] = [...projectsData].reverse();

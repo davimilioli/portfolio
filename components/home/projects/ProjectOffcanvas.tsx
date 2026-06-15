@@ -224,18 +224,20 @@ export default function ProjectOffcanvas({ project, onClose }: ProjectOffcanvasP
                         </div>
 
                         <div className={`p-5 sm:px-8 sm:py-6 border-t shrink-0 flex gap-3 bg-slate-50 ${isLight ? 'border-black/10' : 'border-zinc-800'}`}>
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`flex items-center gap-2 px-6 py-2.5 border rounded-full text-sm font-semibold transition-all duration-200 ${isLight
-                                    ? 'bg-white text-neutral-800 border-black/10 hover:text-black hover:bg-neutral-50 hover:border-black/20 hover:shadow-2xs'
-                                    : 'bg-zinc-900 border-zinc-800 text-neutral-300 hover:text-white hover:border-zinc-700'
-                                    }`}
-                            >
-                                <FaGithub className="w-4 h-4" />
-                                GitHub
-                            </a>
+                            {project.github &&
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`flex items-center gap-2 px-6 py-2.5 border rounded-full text-sm font-semibold transition-all duration-200 ${isLight
+                                        ? 'bg-white text-neutral-800 border-black/10 hover:text-black hover:bg-neutral-50 hover:border-black/20 hover:shadow-2xs'
+                                        : 'bg-zinc-900 border-zinc-800 text-neutral-300 hover:text-white hover:border-zinc-700'
+                                        }`}
+                                >
+                                    <FaGithub className="w-4 h-4" />
+                                    Repositório
+                                </a>
+                            }
                             {project.preview && (
                                 <a
                                     href={project.preview}
@@ -246,7 +248,7 @@ export default function ProjectOffcanvas({ project, onClose }: ProjectOffcanvasP
                                         : 'bg-white text-zinc-950 border-transparent hover:bg-neutral-100'
                                         }`}
                                 >
-                                    Ver demo
+                                    Visualizar
                                     <HiArrowNarrowRight className="w-4 h-4" />
                                 </a>
                             )}
