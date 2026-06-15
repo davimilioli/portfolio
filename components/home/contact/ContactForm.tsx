@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, ReactNode, KeyboardEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { sendContact } from '@/app/actions/contact.actions';
+import { BiMailSend } from 'react-icons/bi';
 
 interface ChatMessage {
     id: string;
     type: 'bot' | 'user';
-    text: string;
+    text: ReactNode;
     time: string;
 }
 
@@ -64,7 +65,7 @@ export default function ContactForm() {
         }
     }, [step, status]);
 
-    const pushBotMessage = (text: string) => {
+    const pushBotMessage = (text: ReactNode) => {
         setMessages(prev => [...prev, { id: Date.now().toString(), type: 'bot', text, time: getTime() }]);
     };
 
@@ -89,7 +90,12 @@ export default function ContactForm() {
             const result = await sendContact(newValues);
             if (result.success) {
                 setStatus('success');
-                setTimeout(() => pushBotMessage('Mensagem recebida! Entrarei em contato em breve. 🎉'), 500);
+                setTimeout(() => pushBotMessage(
+                    <span className="flex items-center gap-1">
+                        Mensagem recebida! Entrarei em contato em breve.
+                        <BiMailSend className="text-green-300 w-5 h-5 inline-block" />
+                    </span>
+                ), 500);
             } else {
                 setStatus('error');
                 setTimeout(() => {
@@ -101,7 +107,7 @@ export default function ContactForm() {
         }
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
     };
 
@@ -113,9 +119,17 @@ export default function ContactForm() {
         values.firstName && { label: 'NOME', value: values.firstName },
         values.email && { label: 'EMAIL', value: values.email },
         values.message && { label: 'MSG', value: values.message.slice(0, 14) + (values.message.length > 14 ? '…' : '') },
-        isSubmitting && { label: '●', value: 'enviando…', accent: 'amber' },
-        isDone && { label: '●', value: 'enviado!', accent: 'green' },
-    ].filter(Boolean) as { label: string; value: string; accent?: string }[];
+        isSubmitting && {
+            label: <span className="h-1.5 w-1.5 bg-amber-400 rounded-full inline-block align-middle animate-pulse"></span>,
+            value: 'enviando…',
+            accent: 'amber'
+        },
+        isDone && {
+            label: <span className="h-1.5 w-1.5 bg-emerald-400 rounded-full inline-block align-middle"></span>,
+            value: 'enviado!',
+            accent: 'green'
+        },
+    ].filter(Boolean) as { label: React.ReactNode; value: string; accent?: string }[];
 
     return (
         <div className="lg:col-span-7 bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm flex flex-col h-[500px]">
@@ -123,9 +137,17 @@ export default function ContactForm() {
             <div className="px-5 py-3.5 border-b border-zinc-800/80 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-mono text-neutral-400">Mensagem &nbsp;·&nbsp; portfolio</span>
+                    <div className="flex gap-2 items-center text-xs font-mono text-neutral-400">
+                        Mensagem
+                        <span className="h-1 w-1 bg-neutral-400 rounded-full inline-block"></span>
+                        portfolio
+                    </div>
                 </div>
-                <span className="text-xs font-mono text-neutral-600">Contato &nbsp;·&nbsp; online</span>
+                <div className="flex items-center gap-2 text-xs font-mono text-neutral-600">
+                    Contato
+                    <span className="h-1 w-1 bg-neutral-600 rounded-full inline-block"></span>
+                    online
+                </div>
             </div>
 
             <div
@@ -209,7 +231,7 @@ export default function ContactForm() {
                             )}
                             <button
                                 onClick={handleSend}
-                                disabled={!input.trim()}
+                                disabled={!!input.trim()}
                                 className="shrink-0 w-10 h-10 rounded-xl bg-indigo-500 hover:bg-indigo-400 disabled:opacity-25 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                             >
                                 <HiArrowNarrowRight className="w-4 h-4 text-white" />
