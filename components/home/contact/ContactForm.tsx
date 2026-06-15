@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
-import { sendContact } from '@/app/actions/contact';
+import { sendContact } from '@/app/actions/contact.actions';
 
 interface ChatMessage {
     id: string;
@@ -33,15 +33,15 @@ export default function ContactForm() {
     const [input, setInput] = useState('');
     const [inputErr, setInputErr] = useState('');
     const [values, setValues] = useState({ firstName: '', email: '', message: '' });
-    
+
     const [messages, setMessages] = useState<ChatMessage[]>(() => [
         { id: 'init', type: 'bot', text: steps[0].question, time: '' },
     ]);
-    
+
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
     useEffect(() => {
-        setMessages(prev => 
+        setMessages(prev =>
             prev.map(msg => msg.id === 'init' ? { ...msg, time: getTime() } : msg)
         );
     }, []);
