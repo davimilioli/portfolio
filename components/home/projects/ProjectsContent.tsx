@@ -139,7 +139,7 @@ export default function ProjectsContent() {
 
                 <div className="flex flex-col flex-1 gap-2 px-1">
                     <h3 className={`text-xl font-bold ${accent.title}`}>{project.name}</h3>
-                    <p className={`text-sm leading-relaxed flex-1 ${accent.desc}`}>{project.description}</p>
+                    <p className={`text-sm leading-relaxed flex-1 line-clamp-5 ${accent.desc}`}>{project.description}</p>
 
                     <div className="flex flex-wrap gap-1.5 pt-2">
                         {project.technologies.map((techName) => {
