@@ -1,8 +1,12 @@
 import HeroContent from '@/components/home/hero/HeroContent';
+import Logo from '@/components/Logo';
 
 export default function Hero() {
     return (
         <section className="min-h-screen relative flex flex-col text-neutral-100 antialiased overflow-hidden bg-[#09090b] bg-[radial-gradient(ellipse_at_30%_5%,rgba(59,130,246,0.09)_0%,rgba(9,9,11,0)_50%),radial-gradient(ellipse_at_70%_95%,rgba(139,92,246,0.08)_0%,rgba(9,9,11,0)_50%)]">
+            <div className="absolute -left-32 top-1/2 -translate-y-1/2 pointer-events-none select-none">
+                <Logo className="w-[700px] md:w-[900px] lg:w-[1100px] h-auto opacity-[0.04]" />
+            </div>
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute -top-48 -left-48 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 animate-float-orb w-[700px] h-[700px] blur-[140px]" />
                 <div className="absolute -bottom-64 -right-48 rounded-full bg-purple-500/10 dark:bg-purple-500/20 animate-float-orb w-[800px] h-[800px] blur-[160px] [animation-delay:4s] [animation-direction:reverse]" />
