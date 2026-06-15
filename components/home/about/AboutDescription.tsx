@@ -6,7 +6,7 @@ import { HiCheck, HiOutlineDocumentText } from 'react-icons/hi';
 import Badge from '@/components/ui/Badge';
 import Heading from '@/components/ui/Heading';
 import Button from '@/components/ui/Button';
-import CurriculoModal from '@/components/home/hero/CurriculoModal';
+import ResumeViewerModal from '@/components/home/modal-viewer/ResumeViewerModal';
 
 export default function AboutDescription() {
     const highlights = [
@@ -70,7 +70,10 @@ export default function AboutDescription() {
                 </div> */}
             </motion.div>
 
-            <CurriculoModal open={curriculoOpen} onClose={() => setCurriculoOpen(false)} />
+            <ResumeViewerModal
+                open={curriculoOpen}
+                onClose={() => setCurriculoOpen(false)}
+            />
         </>
     );
 }

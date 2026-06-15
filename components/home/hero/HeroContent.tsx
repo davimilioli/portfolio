@@ -5,7 +5,7 @@ import { motion, useAnimationControls } from 'motion/react';
 import { HiOutlineDocumentText, HiArrowNarrowRight } from 'react-icons/hi';
 import Container from "@/components/ui/Container";
 import Button from '@/components/ui/Button';
-import CurriculoModal from '@/components/home/hero/CurriculoModal';
+import ResumeViewerModal from '@/components/home/modal-viewer/ResumeViewerModal';
 import Heading from '@/components/ui/Heading';
 
 export default function HeroContent() {
@@ -166,7 +166,7 @@ export default function HeroContent() {
                 </motion.div>
             </div>
 
-            <CurriculoModal open={curriculoOpen} onClose={() => setCurriculoOpen(false)} />
+            <ResumeViewerModal open={curriculoOpen} onClose={() => setCurriculoOpen(false)} />
         </>
     );
 }
