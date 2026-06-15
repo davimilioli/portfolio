@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import Button from '@/components/ui/Button';
-import ProjectOffcanvas from '@/components/home/projects/ProjectOffcanvas';
+import ProjectModal from '@/components/home/projects/ProjectModal';
 import { Project } from '@/types/Project';
 import { projects, getCategoryLabel } from '@/data/projects';
 import { skills } from '@/data/skills';
@@ -236,7 +236,7 @@ export default function ProjectsContent() {
                 </>
             )}
 
-            <ProjectOffcanvas
+            <ProjectModal
                 project={selectedProject}
                 onClose={handleClose}
             />
