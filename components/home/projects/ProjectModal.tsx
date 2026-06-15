@@ -9,6 +9,7 @@ import { FaGithub } from 'react-icons/fa';
 import { Project } from '@/types/Project';
 import { skills } from '@/data/skills';
 import { getCategoryLabel } from '@/data/projects';
+import { projectContent } from '@/data/projectContent';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 
@@ -61,6 +62,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     const prev = () => goTo(imgIndex - 1, -1);
     const next = () => goTo(imgIndex + 1, 1);
 
+    const ProjectContent = project ? projectContent[project.id] : undefined;
+
     if (!mounted) return null;
 
     return createPortal(
@@ -80,7 +83,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         <motion.div
                             role="dialog"
                             aria-modal="true"
-                            className={`pointer-events-auto relative w-full h-full md:h-[90vh] md:container bg-slate-50 border-0 md:border rounded-none md:rounded-3xl ${isLight ? 'border-black/10' : 'border-zinc-800'
+                            className={`pointer-events-auto relative w-full h-full md:h-[90vh] md:max-w-4xl bg-slate-50 border-0 md:border rounded-none md:rounded-3xl ${isLight ? 'border-black/10' : 'border-zinc-800'
                                 } flex flex-col shadow-2xl overflow-hidden`}
                             initial={{ opacity: 0, scale: 0.95, y: 15 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -108,7 +111,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                 </Button>
                             </div>
 
-                            <div className="overflow-y-auto md:overflow-hidden flex-1 p-5 sm:p-8">
+                            <div className="overflow-y-auto md:overflow-hidden md:min-h-0 flex-1 p-5 sm:p-8">
                                 <div className={`grid grid-cols-1 ${project.img && project.img.length > 0 ? 'md:grid-cols-2' : ''} gap-6 md:gap-8 items-start md:h-full`}>
                                     {project.img && project.img.length > 0 && (
                                         <div className="space-y-3">
@@ -163,9 +166,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
                                             {project.img.length > 1 && (
                                                 <div className="flex justify-center gap-1.5">
-                                                    {project.img.map((_, i) => (
+                                                    {project.img.map((image, i) => (
                                                         <button
-                                                            key={i}
+                                                            key={image}
                                                             onClick={() => goTo(i, i > imgIndex ? 1 : -1)}
                                                             className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === imgIndex
                                                                 ? isLight ? 'w-5 bg-neutral-900' : 'w-5 bg-white'
@@ -178,11 +181,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                             )}
                                         </div>
                                     )}
-                                    <div className="space-y-6 md:overflow-y-auto md:max-h-[calc(90vh-170px)] md:pr-4">
-                                        <p className={`leading-relaxed text-sm ${isLight ? 'text-neutral-700' : 'text-neutral-300'
-                                            }`}>
-                                            {project.description}
-                                        </p>
+                                    <div className="space-y-6 md:h-full md:overflow-y-auto md:pr-4">
+                                        {ProjectContent && <ProjectContent />}
 
                                         <div className="space-y-3">
                                             <h3 className={`text-xs font-semibold tracking-wider uppercase ${isLight ? 'text-neutral-500' : 'text-neutral-500'
@@ -209,26 +209,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                                 })}
                                             </div>
                                         </div>
-
-                                        <div className="space-y-3">
-                                            <h3 className="text-xs font-semibold tracking-wider uppercase text-neutral-500">
-                                                Destaques
-                                            </h3>
-                                            <ul className="space-y-3">
-                                                {project.features.map((feature, i) => (
-                                                    <li key={i} className={`flex items-start gap-3 text-sm leading-relaxed ${isLight ? 'text-neutral-700' : 'text-neutral-300'
-                                                        }`}>
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
-                                                        {feature}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className={`p-5 sm:px-8 sm:py-6 border-t shrink-0 flex gap-3 bg-slate-50 ${isLight ? 'border-black/10' : 'border-zinc-800'}`}>
+                            <div className={`p-5 sm:px-8 sm:py-6 border-t shrink-0 flex justify-end items-center gap-3 bg-slate-50 ${isLight ? 'border-black/10' : 'border-zinc-800'}`}>
                                 {project.github &&
                                     <a
                                         href={project.github}
