@@ -6,6 +6,8 @@ import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
+import Logo from '@/components/Logo';
+import Link from 'next/link';
 
 export default function Header() {
     const navItems = [
@@ -69,9 +71,9 @@ export default function Header() {
             <nav className="relative">
                 <Container>
                     <div className="flex items-center justify-between relative">
-
-                        <img src="/logo.svg" alt="Logo" className="h-9 md:h-13 w-auto" />
-
+                        <Link href="/">
+                            <Logo />
+                        </Link>
                         <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
                             {navItems.map(({ label, href }) => (
                                 <button key={href} onClick={() => scrollTo(href)} className={navClass(href)}>
