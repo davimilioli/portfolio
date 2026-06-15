@@ -132,7 +132,7 @@ const projectsData: Project[] = [
     {
         id: 7,
         name: 'Framework Multi-Temas White-Label',
-        description: 'Migração e reestruturação de uma grande plataforma imobiliária para arquitetura Next.js e TypeScript. A transição foi conduzida com IA usando o MCP do GitHub para compreensão de regras de negócios e movimentação de arquivos, o MCP do Figma (com skills) para criação acelerada de componentes estruturados, e o MCP do Next.js DevTools para otimização e depuração em tempo real.',
+        description: 'Migração e reestruturação de uma grande plataforma imobiliária white-label para Next.js e TypeScript, com forte apoio de IA: uso de MCPs (GitHub, Figma e Next.js DevTools) para entender o legado, migrar código, gerar componentes e depurar performance, além de skills customizadas para padronizar cada etapa do processo.',
         category: 'app-web',
         features: [
             'Desenvolvimento de pacote NPM privado: Arquitetura e manutenção de pacote NPM privado isolando o core de regras de negócios para consumo escalável entre aplicações.',
