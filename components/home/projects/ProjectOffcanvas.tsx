@@ -96,7 +96,7 @@ export default function ProjectOffcanvas({ project, onClose }: ProjectOffcanvasP
                                 </h2>
                             </div>
                             <Button
-                                variant="transparent"
+                                variant="icon"
                                 onClick={onClose}
                                 aria-label="Fechar"
                                 className="p-2 shrink-0 mt-1"

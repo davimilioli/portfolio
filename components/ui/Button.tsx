@@ -24,7 +24,7 @@ export default function Button({
     primary: 'bg-white text-neutral-950 border-transparent hover:bg-indigo-500 hover:text-white',
     secondary: 'bg-transparent text-white border border-white hover:bg-white hover:text-neutral-950',
     ghost: 'bg-transparent text-neutral-300 border border-neutral-800 hover:bg-neutral-900 hover:text-white',
-    icon: 'bg-neutral-950 text-neutral-400 border border-neutral-800 hover:bg-neutral-900 hover:text-white',
+    icon: 'bg-neutral-950 text-neutral-400 border border-neutral-800 hover:bg-neutral-900 hover:text-white !px-3',
     outline: 'bg-white text-neutral-900 border-neutral-200 hover:bg-white/90 hover:border-neutral-300 shadow-xs',
     transparent: 'bg-transparent text-neutral-500 border-transparent hover:bg-black/5 hover:text-neutral-900',
   };
