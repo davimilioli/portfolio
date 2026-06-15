@@ -17,6 +17,9 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Davi Milioli - Desenvolvedor Web",
   description: "Sou um desenvolvedor web dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.",
+  authors: [{ name: "Davi Milioli", url: "https://www.davimilioli.dev" }],
+  creator: "Davi Milioli",
+  publisher: "Davi Milioli",
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Davi Milioli",
     images: [
       {
-        url: "https://www.davimilioli.dev/ogimage.jpg",
+        url: "https://www.davimilioli.dev/ogimage.png",
         width: 1200,
         height: 630,
         alt: "Davi Milioli - Portfólio",
