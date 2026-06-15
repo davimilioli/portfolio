@@ -7,7 +7,7 @@ export interface Project {
     img?: string[];
     name: string;
     description: string;
-    github: string;
+    github?: string;
     preview?: string;
     category: string;
     features: string[];
