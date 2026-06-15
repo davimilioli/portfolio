@@ -129,6 +129,21 @@ const projectsData: Project[] = [
         ],
         technologies: ['NextJs', 'React', 'Tailwind', 'TypeScript'],
     },
+    {
+        id: 7,
+        name: 'Framework Multi-Temas White-Label',
+        description: 'Migração e reestruturação de uma grande plataforma imobiliária para arquitetura Next.js e TypeScript. A transição foi conduzida com IA usando o MCP do GitHub para compreensão de regras de negócios e movimentação de arquivos, o MCP do Figma (com skills) para criação acelerada de componentes estruturados, e o MCP do Next.js DevTools para otimização e depuração em tempo real.',
+        category: 'app-web',
+        features: [
+            'Desenvolvimento de pacote NPM privado: Arquitetura e manutenção de pacote NPM privado isolando o core de regras de negócios para consumo escalável entre aplicações.',
+            'Sistema de temas modular: Arquitetura de sistema de temas modular com suporte a sobrescrita de componentes em tempo de build.',
+            'Migração de código com MCP: Mapeamento de regras de negócio legadas e automação de migração de código via MCP integrado ao GitHub.',
+            'Design-to-Code acelerado: Criação acelerada de componentes React estruturados utilizando IA com o uso de skills, alimentada por guias de diretrizes e variáveis de design via Figma MCP.',
+            'Contextualização de projeto: Mapeamento e estruturação de contexto arquitetural do projeto para guiar e especializar o desenvolvimento assistido por IA.',
+            'Depuração avançada: Análise de renderização e depuração de performance utilizando Next.js DevTools MCP.',
+        ],
+        technologies: ['NextJs', 'React', 'TypeScript', 'Tailwind', 'MCP', 'Figma', 'Antigravity', 'Claude'],
+    },
 ];
 
 export const projects: Project[] = [...projectsData].reverse();
