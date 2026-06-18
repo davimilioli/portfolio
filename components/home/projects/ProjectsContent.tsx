@@ -122,14 +122,24 @@ export default function ProjectsContent() {
 
                 <div className={`${accent.inner} rounded-2xl overflow-hidden ${imgHeight} relative mb-4 flex-shrink-0 flex items-center justify-center`}>
                     {project.img?.[0] ? (
-                        <Image
-                            src={project.img[0]}
-                            alt={project.name}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-cover"
-                            unoptimized={project.img[0].endsWith('.gif')}
-                        />
+                        project.img[0].endsWith('.mp4') ? (
+                            <video
+                                src={project.img[0]}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="absolute inset-0 w-full h-full object-cover"
+                            />
+                        ) : (
+                            <Image
+                                src={project.img[0]}
+                                alt={project.name}
+                                fill
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                className="object-cover"
+                            />
+                        )
                     ) : (
                         <span className={`text-8xl font-black opacity-5 leading-none select-none ${accent.title}`}>
                             {project.name.charAt(0)}

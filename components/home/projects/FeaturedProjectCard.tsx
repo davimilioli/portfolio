@@ -30,14 +30,24 @@ export default function FeaturedProjectCard({
 
             <div className="mx-4 rounded-xl bg-zinc-950 overflow-hidden h-56 relative border border-zinc-800/50 flex-shrink-0">
                 {img ? (
-                    <Image
-                        src={img}
-                        alt={title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        unoptimized={img.endsWith('.gif')}
-                    />
+                    img.endsWith('.mp4') ? (
+                        <video
+                            src={img}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                    ) : (
+                        <Image
+                            src={img}
+                            alt={title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                    )
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden">
                         <span className="text-9xl font-black text-zinc-800/70 leading-none">

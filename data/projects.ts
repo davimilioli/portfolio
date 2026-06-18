@@ -82,7 +82,7 @@ const projectsData: Project[] = [
     {
         id: 4,
         name: 'Wallet',
-        img: ['/projetcs/wallet.gif'],
+        img: ['/projetcs/wallet.mp4'],
         description: 'Wallet é um mini projeto de controle financeiro desenvolvido para praticar conceitos modernos de desenvolvimento front-end utilizando React, TypeScript e TailwindCSS.',
         github: 'https://github.com/davimilioli/wallet',
         category: 'website',
@@ -99,7 +99,7 @@ const projectsData: Project[] = [
     {
         id: 5,
         name: 'Mist - Previsão do Tempo',
-        img: ['/projetcs/mist.gif'],
+        img: ['/projetcs/mist.mp4'],
         description: 'Mist é uma aplicação web de previsão do tempo, desenvolvida com Next.js, que permite aos usuários buscar cidades e visualizar as condições meteorológicas atuais, previsões horárias e para os próximos dias.',
         github: 'https://github.com/davimilioli/mist',
         preview: 'https://mist-black.vercel.app/',

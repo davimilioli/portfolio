@@ -56,7 +56,7 @@ export default function HeroContent() {
 
     return (
         <>
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
                 <motion.div
                     className="absolute w-10 h-10 bg-teal-400/70 dark:bg-teal-400/80 rounded-lg top-[18%] right-[28%]"
                     animate={{ y: [-10, 10, -10], rotate: [0, 15, 0] }}

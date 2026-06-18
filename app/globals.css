@@ -98,3 +98,11 @@ body {
 @utility animate-message-in {
   animation: messageIn 0.4s ease-out;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-orb,
+  .animate-gradient-shift,
+  .animate-pulse {
+    animation: none;
+  }
+}

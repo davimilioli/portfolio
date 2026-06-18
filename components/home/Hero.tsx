@@ -8,9 +8,9 @@ export default function Hero() {
                 <Logo className="w-[700px] md:w-[900px] lg:w-[1100px] h-auto opacity-[0.04]" />
             </div>
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-48 -left-48 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 animate-float-orb w-[700px] h-[700px] blur-[140px]" />
-                <div className="absolute -bottom-64 -right-48 rounded-full bg-purple-500/10 dark:bg-purple-500/20 animate-float-orb w-[800px] h-[800px] blur-[160px] [animation-delay:4s] [animation-direction:reverse]" />
-                <div className="absolute top-1/3 right-1/3 rounded-full bg-emerald-500/8 dark:bg-emerald-500/12 animate-float-orb w-[500px] h-[500px] blur-[120px] [animation-delay:2s] [animation-duration:14s]" />
+                <div className="hidden md:block absolute -top-48 -left-48 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 animate-float-orb w-[600px] h-[600px] blur-[80px] will-change-transform" />
+                <div className="hidden md:block absolute -bottom-64 -right-48 rounded-full bg-purple-500/10 dark:bg-purple-500/20 animate-float-orb w-[700px] h-[700px] blur-[80px] [animation-delay:4s] [animation-direction:reverse] will-change-transform" />
+                <div className="hidden lg:block absolute top-1/3 right-1/3 rounded-full bg-emerald-500/8 dark:bg-emerald-500/12 animate-float-orb w-[400px] h-[400px] blur-[70px] [animation-delay:2s] [animation-duration:14s] will-change-transform" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neutral-50/30 to-neutral-50 dark:via-neutral-950/30 dark:to-neutral-950 pointer-events-none" />
             <HeroContent />

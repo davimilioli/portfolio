@@ -129,14 +129,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                                         transition={{ type: 'spring', damping: 32, stiffness: 320 }}
                                                         className="absolute inset-0"
                                                     >
-                                                        <Image
-                                                            src={project.img[imgIndex]}
-                                                            alt={`${project.name} screenshot ${imgIndex + 1}`}
-                                                            fill
-                                                            sizes="(max-width: 768px) 100vw, 512px"
-                                                            className="object-cover"
-                                                            unoptimized={project.img[imgIndex].endsWith('.gif')}
-                                                        />
+                                                        {project.img[imgIndex].endsWith('.mp4') ? (
+                                                            <video
+                                                                src={project.img[imgIndex]}
+                                                                autoPlay
+                                                                loop
+                                                                muted
+                                                                playsInline
+                                                                className="absolute inset-0 w-full h-full object-cover"
+                                                            />
+                                                        ) : (
+                                                            <Image
+                                                                src={project.img[imgIndex]}
+                                                                alt={`${project.name} screenshot ${imgIndex + 1}`}
+                                                                fill
+                                                                sizes="(max-width: 768px) 100vw, 512px"
+                                                                className="object-cover"
+                                                            />
+                                                        )}
                                                     </motion.div>
                                                 </AnimatePresence>
 
