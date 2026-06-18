@@ -216,7 +216,7 @@ export default function ContactForm() {
                                     onKeyDown={handleKeyDown}
                                     rows={2}
                                     placeholder={steps[step]?.placeholder}
-                                    className="flex-1 bg-zinc-900 border border-zinc-800 focus:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none resize-none transition-colors"
+                                    className="flex-1 bg-zinc-900 border border-zinc-800 focus:border-zinc-700 rounded-xl px-4 py-2.5 text-base sm:text-sm text-neutral-200 placeholder-neutral-600 placeholder:text-sm focus:outline-none resize-none transition-colors"
                                 />
                             ) : (
                                 <input
@@ -226,7 +226,7 @@ export default function ContactForm() {
                                     onChange={(e) => { setInput(e.target.value); setInputErr(''); }}
                                     onKeyDown={handleKeyDown}
                                     placeholder={steps[step]?.placeholder}
-                                    className="flex-1 bg-zinc-900 border border-zinc-800 focus:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none transition-colors"
+                                    className="flex-1 bg-zinc-900 border border-zinc-800 focus:border-zinc-700 rounded-xl px-4 py-2.5 text-base sm:text-sm text-neutral-200 placeholder-neutral-600 placeholder:text-sm focus:outline-none transition-colors"
                                 />
                             )}
                             <button

@@ -32,7 +32,7 @@ export default function Button({
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
 
-  if (href?.startsWith("http")) {
+  if (href) {
     return (
       <a href={href} className={combinedClasses} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
         {children}
