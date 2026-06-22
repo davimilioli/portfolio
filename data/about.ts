@@ -61,7 +61,7 @@ export const aboutInfo: AboutInfo = {
       id: 1,
       icon: LuCodeXml,
       title: "Desenvolvimento Web",
-      description: "Experiência no desenvolvimento e manutenção de sites e aplicações web utilizando HTML, CSS, JavaScript, TypeScript e PHP, aplicando boas práticas de organização e performance."
+      description: "Experiência no desenvolvimento e manutenção de sites e aplicações web utilizando HTML, CSS, JavaScript, TypeScript, Next.js, React, Tailwind e PHP, aplicando boas práticas de organização e performance."
     },
     {
       id: 2,
