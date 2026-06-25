@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import Logo from '@/components/Logo';
 import Link from 'next/link';
+import { aboutInfo } from '@/data/about';
 
 export default function Header() {
     const navItems = [
@@ -83,15 +84,21 @@ export default function Header() {
                         </div>
 
                         <div className="hidden md:flex items-center gap-3">
-                            <a href="https://linkedin.com/in/davimilioli" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors duration-200" title="LinkedIn">
-                                <FaLinkedin className="w-4.5 h-4.5" />
-                            </a>
-                            <a href="https://github.com/davimilioli" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors duration-200" title="GitHub">
-                                <FaGithub className="w-4.5 h-4.5" />
-                            </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors duration-200" title="Instagram">
-                                <FaInstagram className="w-4.5 h-4.5" />
-                            </a>
+                            {aboutInfo.personalData.socials.map((social) => {
+                                const Icon = social.icon;
+                                return (
+                                    <a
+                                        key={social.name}
+                                        href={social.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-neutral-400 hover:text-white transition-colors duration-200"
+                                        title={social.name}
+                                    >
+                                        <Icon className="w-4.5 h-4.5" />
+                                    </a>
+                                );
+                            })}
 
                             <div className="h-5 w-px bg-neutral-700 mx-1" />
 
