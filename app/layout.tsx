@@ -20,8 +20,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Davi Milioli - Desenvolvedor Web",
-  description: "Sou um desenvolvedor web dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.",
+  title: "Davi Milioli - Desenvolvedor Full-Stack",
+  description: "Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.",
   authors: [{ name: "Davi Milioli", url: "https://www.davimilioli.dev" }],
   creator: "Davi Milioli",
   publisher: "Davi Milioli",
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     apple: '/logo.svg',
   },
   openGraph: {
-    title: "Davi Milioli - Desenvolvedor Web",
-    description: "Sou um desenvolvedor web dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade.",
+    title: "Davi Milioli - Desenvolvedor Full-Stack",
+    description: "Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade.",
     url: "https://www.davimilioli.dev",
     siteName: "Davi Milioli",
     images: [

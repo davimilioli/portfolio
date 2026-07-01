@@ -203,7 +203,7 @@ export default function ProjectsContent() {
                             <div className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 w-[82%]" />
                         </div>
                         <div className="flex justify-between mt-1.5 text-xs text-neutral-400">
-                            <span>3+ anos exp.</span>
+                            <span>4 anos exp.</span>
                             <span>82%</span>
                         </div>
                     </div>

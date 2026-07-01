@@ -10,8 +10,8 @@ import ResumeViewerModal from '@/components/home/modal-viewer/ResumeViewerModal'
 
 export default function AboutDescription() {
     const highlights = [
-        '4+ anos de experiência com Desenvolvimento Web',
-        'Experiência com Next.js, Node.js, React, TypeScript e Tailwind CSS',
+        '4 anos de experiência com Desenvolvimento Web',
+        'Experiência com Next.js, Node.js, React, TypeScript, PHP e Tailwind CSS',
         'Otimização de fluxos de desenvolvimento com IA e Model Context Protocol (MCP)',
         'Participação em mais de 80 projetos ao longo de 4 anos',
         'Foco em infraestrutura moderna, automação de deploys e entrega contínua',
@@ -37,7 +37,7 @@ export default function AboutDescription() {
                 </div>
 
                 <p className="text-neutral-400 leading-relaxed text-base">
-                    Desenvolvedor web com foco em criar experiências digitais que combinam bom design com código sólido. Selecione uma seção ao lado para saber mais sobre mim.
+                    Desenvolvedor Full-Stack com foco em criar experiências digitais que combinam bom design com código sólido.
                 </p>
 
                 <ul className="space-y-3">

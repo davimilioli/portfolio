@@ -5,10 +5,10 @@ import { SiGithub, SiInstagram } from "react-icons/si";
 
 export const aboutInfo: AboutInfo = {
   personalData: {
-    role: "Desenvolvedor Web",
+    role: "Desenvolvedor Full-Stack",
     email: "davimilioli2108@gmail.com",
     whatsapp: "(21) 99213-3618",
-    bio: "Sou um desenvolvedor web dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente e aprimorar meus conhecimentos.",
+    bio: "Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente e aprimorar meus conhecimentos.",
     socials: [
       { icon: SlSocialLinkedin, name: 'Linkedin', link: 'https://www.linkedin.com/in/davimilioli/' },
       { icon: SiGithub, name: 'Github', link: 'https://github.com/davimilioli' },
@@ -19,7 +19,7 @@ export const aboutInfo: AboutInfo = {
     {
       id: 1,
       period: "2022 — Atualmente",
-      title: "Desenvolvedor Web",
+      title: "Desenvolvedor Full-Stack",
       company: "Inforce Tecnologia",
       description: [
         "Desenvolvimento e manutenção de sites e aplicações web utilizando HTML, CSS, SASS, JavaScript, TypeScript, jQuery, PHP, React, Next.js e Node.js.",
@@ -27,6 +27,8 @@ export const aboutInfo: AboutInfo = {
         "Criação e manutenção de componentes reutilizáveis, contribuindo para a padronização e escalabilidade dos projetos.",
         "Utilização de ferramentas de IA e MCP no processo de desenvolvimento, incluindo criação de skills para automação e padronização de projetos.",
         "Integração entre Front-End e Back-End em projetos PHP, garantindo comunicação eficiente entre as camadas da aplicação.",
+        "Configuração de ambientes de deploy, garantindo que os sites entrem no ar em produção.",
+        "Configuração de pipelines de CI/CD com GitHub Actions para automação de deploy",
         "Otimização de performance e aplicação de boas práticas de SEO, visando melhor desempenho e maior visibilidade nos mecanismos de busca.",
         "Criação e adaptação de layouts no Figma, colaborando com a definição visual e experiência do usuário.",
         "Apoio ao time na avaliação e adoção de novas ferramentas e tecnologias, com foco em melhoria de produtividade e qualidade das entregas."

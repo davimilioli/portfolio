@@ -98,7 +98,7 @@ export default function HeroContent() {
                     </div>
                     <div className="flex justify-between gap-8">
                         <span className="text-neutral-400 dark:text-neutral-600 uppercase text-xs tracking-widest">EXP</span>
-                        <span className="text-neutral-700 dark:text-neutral-300">3+ anos</span>
+                        <span className="text-neutral-700 dark:text-neutral-300">4 anos</span>
                     </div>
                 </div>
             </motion.div>
@@ -117,7 +117,7 @@ export default function HeroContent() {
                                     Disponível para novos projetos
                                 </span>
                                 <span className="text-neutral-300 dark:text-neutral-700">{"//"}</span>
-                                <span className="tracking-widest uppercase text-xs text-neutral-400 dark:text-neutral-500">DEV WEB • 2026</span>
+                                <span className="tracking-widest uppercase text-xs text-neutral-400 dark:text-neutral-500">DEV FULL-STACK • 2026</span>
                             </div>
                         </motion.div>
 
@@ -132,7 +132,7 @@ export default function HeroContent() {
 
                         <motion.div variants={itemVariants} className="flex flex-col items-start gap-6 max-w-2xl">
                             <p className="text-base text-neutral-500 dark:text-neutral-400 leading-relaxed flex-1">
-                                Sou um desenvolvedor web dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.
+                                Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.
                             </p>
                             <div className="shrink-0 flex flex-wrap gap-3">
                                 <Button variant="primary" onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}>
@@ -156,7 +156,7 @@ export default function HeroContent() {
                 >
                     <Container>
                         <div className="flex items-center justify-between py-4 font-mono text-xs text-neutral-400 dark:text-neutral-600 uppercase tracking-widest">
-                            <span>3+ Anos de Experiência &nbsp;•&nbsp; 80+ Projetos &nbsp;•&nbsp; Next.js &amp; TypeScript</span>
+                            <span>4 Anos de Experiência &nbsp;•&nbsp; 80+ Projetos &nbsp;•&nbsp; Next.js &amp; TypeScript</span>
                             <span className="hidden sm:flex items-center gap-2 text-emerald-600 dark:text-emerald-500">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                                 Disponível &nbsp;•&nbsp; Novos Projetos
