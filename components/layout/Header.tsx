@@ -36,6 +36,14 @@ export default function Header() {
     }, []);
 
     useEffect(() => {
+        const handleDashboardTabChange = (e: Event) => {
+            const customEvent = e as CustomEvent<number>;
+            const idxToId = ['sobre', 'skills', 'projetos'];
+            const id = idxToId[customEvent.detail];
+            if (id) setActive(id);
+        };
+        window.addEventListener('dashboard-tab-changed', handleDashboardTabChange);
+
         const observers: IntersectionObserver[] = [];
         navItems.forEach(({ href }) => {
             const el = document.getElementById(href);
@@ -47,14 +55,26 @@ export default function Header() {
             obs.observe(el);
             observers.push(obs);
         });
-        return () => observers.forEach(obs => obs.disconnect());
+        
+        return () => {
+            window.removeEventListener('dashboard-tab-changed', handleDashboardTabChange);
+            observers.forEach(obs => obs.disconnect());
+        };
     }, []);
 
     const scrollTo = (id: string) => {
         setIsOpen(false);
-        setTimeout(() => {
-            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-        }, 320);
+        const tabMap: Record<string, number> = { 'sobre': 0, 'skills': 1, 'projetos': 2 };
+        const tabIdx = tabMap[id];
+        if (typeof tabIdx === 'number') {
+            const event = new CustomEvent('change-tab', { detail: tabIdx });
+            window.dispatchEvent(event);
+            setActive(id);
+        } else {
+            setTimeout(() => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+            }, 320);
+        }
     };
 
     const navClass = (id: string) =>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimationControls } from 'motion/react';
-import { HiOutlineDocumentText, HiArrowNarrowRight } from 'react-icons/hi';
+import { HiOutlineDocumentText, HiArrowNarrowRight, HiOutlineUser, HiOutlineCode, HiOutlineFolder } from 'react-icons/hi';
 import Container from "@/components/ui/Container";
 import Button from '@/components/ui/Button';
 import ResumeViewerModal from '@/components/home/modal-viewer/ResumeViewerModal';
@@ -34,6 +34,25 @@ export default function HeroContent() {
     const started = useRef(false);
     const [curriculoOpen, setCurriculoOpen] = useState(false);
     const [uptime, setUptime] = useState('00:00:00');
+    const [heroActiveTab, setHeroActiveTab] = useState(0);
+
+    const heroTabs = [
+        {
+            id: 0,
+            title: 'Sobre mim',
+            icon: HiOutlineUser,
+        },
+        {
+            id: 1,
+            title: 'skills',
+            icon: HiOutlineCode,
+        },
+        {
+            id: 2,
+            title: 'projetos',
+            icon: HiOutlineFolder,
+        },
+    ];
 
     useEffect(() => {
         if (!started.current) {
@@ -73,6 +92,53 @@ export default function HeroContent() {
                     transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
                 />
             </div>
+
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+                className="absolute top-100 left-50 z-20 hidden lg:block w-[340px]"
+            >
+                <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm text-left">
+                    <div className="px-5 py-4 border-b border-zinc-800/80 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-sm font-medium text-neutral-300">Meu Perfil</span>
+                        </div>
+                        <span className="text-xs text-neutral-600">{heroTabs.length} seções</span>
+                    </div>
+
+                    {heroTabs.map((tab, idx) => {
+                        const Icon = tab.icon;
+                        const isSelected = heroActiveTab === idx;
+                        const isLast = idx === heroTabs.length - 1;
+                        return (
+                            <div
+                                key={tab.id}
+                                className={`${!isLast ? 'border-b border-zinc-800/60' : ''} transition-colors duration-200 ${isSelected ? 'bg-zinc-800/40' : 'hover:bg-zinc-800/20'}`}
+                            >
+                                <button
+                                    onClick={() => setHeroActiveTab(idx)}
+                                    className="w-full px-5 py-4 flex items-center gap-3 text-left focus:outline-none cursor-pointer"
+                                >
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200 ${isSelected ? 'bg-indigo-500/20 text-indigo-400' : 'bg-zinc-800 text-zinc-500'}`}>
+                                        <Icon className="w-5 h-5" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <span className={`font-semibold text-sm transition-colors duration-200 ${isSelected ? 'text-white' : 'text-neutral-400'}`}>
+                                            {tab.title}
+                                        </span>
+                                    </div>
+                                    {isSelected && (
+                                        <span className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
+                                    )}
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+            </motion.div>
+
 
             <motion.div
                 initial={{ opacity: 0, x: 20 }}
