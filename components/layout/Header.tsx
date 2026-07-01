@@ -16,6 +16,7 @@ export default function Header() {
         { label: 'Skills', href: 'skills' },
         { label: 'Projetos', href: 'projetos' },
     ];
+
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [active, setActive] = useState('');
@@ -173,10 +174,23 @@ export default function Header() {
                                         <HiArrowNarrowRight className="w-4 h-4 ml-1.5 inline-block" />
                                     </Button>
                                     <div className="flex justify-center gap-4 mt-2 py-2 border-t border-neutral-800/50">
-                                        <a href="https://linkedin.com/in/davimilioli" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white"><FaLinkedin className="w-5 h-5" /></a>
-                                        <a href="https://github.com/davimilioli" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white"><FaGithub className="w-5 h-5" /></a>
-                                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white"><FaInstagram className="w-5 h-5" /></a>
+                                        {aboutInfo.personalData.socials.map((social) => {
+                                            const Icon = social.icon;
+                                            return (
+                                                <a
+                                                    key={social.name}
+                                                    href={social.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-neutral-400 hover:text-whit"
+                                                    title={social.name}
+                                                >
+                                                    <Icon className="w-5 h-5" />
+                                                </a>
+                                            );
+                                        })}
                                     </div>
+
                                 </div>
                             </Container>
                         </motion.div>
