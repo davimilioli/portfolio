@@ -255,7 +255,7 @@ export default function ContactForm() {
                                 }`}
                         >
                             <span className="font-semibold">{tag.label}</span>
-                            {tag.value && <span className="text-neutral-600 mx-0.5">·</span>}
+                            {tag.value && <span className="w-1 h-1 rounded-full bg-neutral-600 mx-0.5" />}
                             <span>{tag.value}</span>
                         </span>
                     ))}

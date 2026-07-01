@@ -23,8 +23,11 @@ export default function ProjectCard({
             className="group bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden cursor-pointer hover:border-zinc-700 transition-all duration-300 flex flex-col"
         >
 
-            <div className="px-5 pt-5 pb-3 text-xs font-mono text-neutral-500 uppercase tracking-widest">
-                • {tag} &nbsp;·&nbsp; {title}
+            <div className="px-5 pt-5 pb-3 text-xs font-mono text-neutral-500 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-neutral-500" />
+                <span>{tag}</span>
+                <span className="w-1 h-1 rounded-full bg-neutral-500" />
+                <span>{title}</span>
             </div>
 
 

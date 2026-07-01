@@ -3,7 +3,13 @@ import ChatDemo from './ChatDemo';
 export default function GithubChatDemo() {
     return (
         <ChatDemo
-            label="MCP · GitHub"
+            label={
+                <span className="flex items-center gap-1.5">
+                    <span>MCP</span>
+                    <span className="w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                    <span>GitHub</span>
+                </span>
+            }
             userMessage={
                 <>
                     Acesse o repositório legado, abra o arquivo <code className="font-mono text-indigo-100">regras.ts</code><br />

@@ -24,9 +24,11 @@ export default function FeaturedProjectCard({
         >
 
             <div className="px-5 pt-5 pb-3 text-xs font-mono text-neutral-500 uppercase tracking-widest">
-                • {tag} &nbsp;·&nbsp; {title}
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 inline-block" />
+                {tag} 
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 inline-block" />
+                {title}
             </div>
-
 
             <div className="mx-4 rounded-xl bg-zinc-950 overflow-hidden h-56 relative border border-zinc-800/50 flex-shrink-0">
                 {img ? (
@@ -57,7 +59,6 @@ export default function FeaturedProjectCard({
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent pointer-events-none" />
             </div>
-
 
             <div className="px-5 pt-5 pb-6 flex flex-col flex-1 space-y-3">
                 <h3 className="text-lg font-bold text-neutral-100 group-hover:text-white transition-colors">

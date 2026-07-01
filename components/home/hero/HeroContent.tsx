@@ -117,7 +117,7 @@ export default function HeroContent() {
                                     Disponível para novos projetos
                                 </span>
                                 <span className="text-neutral-300 dark:text-neutral-700">{"//"}</span>
-                                <span className="tracking-widest uppercase text-xs text-neutral-400 dark:text-neutral-500">DEV FULL-STACK • 2026</span>
+                                <span className="tracking-widest uppercase text-xs text-neutral-400">DEV FULL-STACK <span className="w-1 h-1 rounded-full bg-neutral-400 inline-block" />  2026</span>
                             </div>
                         </motion.div>
 
@@ -156,10 +156,18 @@ export default function HeroContent() {
                 >
                     <Container>
                         <div className="flex items-center justify-between py-4 font-mono text-xs text-neutral-400 dark:text-neutral-600 uppercase tracking-widest">
-                            <span>4 Anos de Experiência &nbsp;•&nbsp; 80+ Projetos &nbsp;•&nbsp; Next.js &amp; TypeScript</span>
+                            <span className="flex items-center gap-2">
+                                <span>4 Anos de Experiência</span>
+                                <span className="w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                                <span>80+ Projetos</span>
+                                <span className="w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                                <span>Next.js &amp; TypeScript</span>
+                            </span>
                             <span className="hidden sm:flex items-center gap-2 text-emerald-600 dark:text-emerald-500">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                Disponível &nbsp;•&nbsp; Novos Projetos
+                                <span>Disponível</span>
+                                <span className="w-1 h-1 rounded-full bg-emerald-500 dark:bg-emerald-500/60" />
+                                <span>Novos Projetos</span>
                             </span>
                         </div>
                     </Container>

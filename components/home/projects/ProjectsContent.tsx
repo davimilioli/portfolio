@@ -28,6 +28,7 @@ export default function ProjectsContent() {
             label: 'text-indigo-500 font-semibold',
             title: 'text-neutral-900',
             desc: 'text-neutral-500',
+            dot: 'bg-indigo-500',
             btn: 'border-blue-200 text-blue-600 hover:bg-blue-50',
         },
         {
@@ -37,6 +38,7 @@ export default function ProjectsContent() {
             label: 'text-purple-500 font-semibold',
             title: 'text-neutral-900',
             desc: 'text-neutral-500',
+            dot: 'bg-purple-500',
             btn: 'border-purple-200 text-purple-600 hover:bg-purple-50',
         },
         {
@@ -46,6 +48,7 @@ export default function ProjectsContent() {
             label: 'text-emerald-500 font-semibold',
             title: 'text-neutral-900',
             desc: 'text-neutral-500',
+            dot: 'bg-emerald-500',
             btn: 'border-emerald-200 text-emerald-600 hover:bg-emerald-50',
         },
         {
@@ -55,6 +58,7 @@ export default function ProjectsContent() {
             label: 'text-rose-500 font-semibold',
             title: 'text-neutral-900',
             desc: 'text-neutral-500',
+            dot: 'bg-rose-500',
             btn: 'border-rose-200 text-rose-600 hover:bg-rose-50',
         },
     ];
@@ -117,7 +121,14 @@ export default function ProjectsContent() {
                 className={`${accent.bg} rounded-3xl p-5 flex flex-col cursor-pointer group transition-all duration-300 w-72 sm:w-auto shrink-0 snap-start ${className}`}
             >
                 <div className={`text-xs font-mono uppercase tracking-widest mb-3 ${accent.label}`}>
-                    • {getCategoryLabel(project.category)} &nbsp;·&nbsp; {project.name}
+                    <div className="flex items-center gap-2 w-fit">
+                        <span className={`w-1.5 h-1.5 rounded-full inline-block ${accent.dot}`} />
+                            {getCategoryLabel(project.category)}
+                    </div>
+                    <div className="flex items-center gap-2 w-fit">
+                        <span className={`w-1.5 h-1.5 rounded-full inline-block ${accent.dot}`} /> 
+                        {project.name}
+                    </div>
                 </div>
 
                 <div className={`${accent.inner} rounded-2xl overflow-hidden ${imgHeight} relative mb-4 flex-shrink-0 flex items-center justify-center`}>
@@ -193,8 +204,11 @@ export default function ProjectsContent() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 flex flex-col group md:col-span-3">
-                    <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">
-                        • PORTFÓLIO · NÚMEROS
+                    <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3 flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-neutral-500" />
+                        <span>PORTFÓLIO</span>
+                        <span className="w-1 h-1 rounded-full bg-neutral-500" />
+                        <span>NÚMEROS</span>
                     </div>
                     <div className="bg-zinc-950 rounded-2xl border border-zinc-800/60 p-5 mb-4 flex-shrink-0">
                         <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-1">Participação em projetos</p>

@@ -3,7 +3,13 @@ import ChatDemo from './ChatDemo';
 export default function FigmaChatDemo() {
     return (
         <ChatDemo
-            label="MCP · Figma Pixel Perfect"
+            label={
+                <span className="flex items-center gap-1.5">
+                    <span>MCP</span>
+                    <span className="w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                    <span>Figma Pixel Perfect</span>
+                </span>
+            }
             userMessage={
                 <>
                     Crie o componente <code className="font-mono text-indigo-100">PropertyCard</code> seguindo a skill @<strong className="font-semibold">Figma Pixel Perfect</strong><br />

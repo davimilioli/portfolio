@@ -10,7 +10,7 @@ export interface ChatDemoStep {
 }
 
 interface ChatDemoProps {
-    label: string;
+    label: ReactNode;
     userMessage: ReactNode;
     steps: ChatDemoStep[];
     stepDelay?: number;
