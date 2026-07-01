@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Button from '@/components/ui/Button';
 import { categoriesSkills, skills } from '@/data/skills';
-import SkillCard from '@/components/home/skills/SkillCard';
+import SkillCard from './SkillCard';
 
 
 export default function ExpandableSkills() {

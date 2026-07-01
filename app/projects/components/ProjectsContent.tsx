@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import Button from '@/components/ui/Button';
-import ProjectModal from '@/components/home/projects/ProjectModal';
+import ProjectModal from './ProjectModal';
 import { Project } from '@/types/Project';
 import { projects, getCategoryLabel } from '@/data/projects';
 import { skills } from '@/data/skills';
@@ -84,13 +84,13 @@ export default function ProjectsContent() {
         setTimeout(() => {
             document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
         }, 300);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleClose = useCallback(() => {
         setSelectedProject(null);
         if (window.location.pathname.startsWith('/projects/')) {
-            window.history.pushState({}, '', '/');
+            window.history.pushState({}, '', '/projects');
         }
     }, []);
 
@@ -123,10 +123,10 @@ export default function ProjectsContent() {
                 <div className={`text-xs font-mono uppercase tracking-widest mb-3 ${accent.label}`}>
                     <div className="flex items-center gap-2 w-fit">
                         <span className={`w-1.5 h-1.5 rounded-full inline-block ${accent.dot}`} />
-                            {getCategoryLabel(project.category)}
+                        {getCategoryLabel(project.category)}
                     </div>
                     <div className="flex items-center gap-2 w-fit">
-                        <span className={`w-1.5 h-1.5 rounded-full inline-block ${accent.dot}`} /> 
+                        <span className={`w-1.5 h-1.5 rounded-full inline-block ${accent.dot}`} />
                         {project.name}
                     </div>
                 </div>
@@ -202,7 +202,7 @@ export default function ProjectsContent() {
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            {/*             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 flex flex-col group md:col-span-3">
                     <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3 flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-neutral-500" />
@@ -222,7 +222,7 @@ export default function ProjectsContent() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {extraProjects.length > 0 && (
                 <>

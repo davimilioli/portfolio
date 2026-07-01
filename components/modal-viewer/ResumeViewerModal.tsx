@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { HiOutlineDownload, HiX } from 'react-icons/hi';
-import { FiZoomIn, FiZoomOut } from 'react-icons/fi'; // Importe os ícones aqui
+import { FiZoomIn, FiZoomOut } from 'react-icons/fi';
 import Button from '@/components/ui/Button';
 import dynamic from 'next/dynamic';
 
@@ -13,7 +13,7 @@ interface ResumeViewerModalProps {
     onClose: () => void;
 }
 
-const PdfViewer = dynamic(() => import("@/components/home/modal-viewer/PdfViewer"), {
+const PdfViewer = dynamic(() => import("@/components/modal-viewer/PdfViewer"), {
     ssr: false,
     loading: () => (
         <div className="flex flex-col items-center justify-center min-h-[400px] w-full py-12 px-4 gap-3 animate-pulse">
@@ -26,12 +26,10 @@ const PdfViewer = dynamic(() => import("@/components/home/modal-viewer/PdfViewer
 export default function ResumeViewerModal({ open, onClose }: ResumeViewerModalProps) {
     const [mounted, setMounted] = useState(false);
 
-    // 1. Movemos o estado do zoom para o Modal Pai
     const [scale, setScale] = useState<number>(1.1);
 
     useEffect(() => { setMounted(true); }, []);
 
-    // 2. Ajusta o zoom inicial baseado no tamanho da tela do cliente
     useEffect(() => {
         if (open && typeof window !== 'undefined') {
             if (window.innerWidth < 640) {
@@ -55,7 +53,6 @@ export default function ResumeViewerModal({ open, onClose }: ResumeViewerModalPr
         return () => { document.body.style.overflow = ''; };
     }, [open]);
 
-    // Funções de clique do zoom
     const handleZoomIn = () => setScale((prev) => Math.min(prev + 0.15, 2.0));
     const handleZoomOut = () => setScale((prev) => Math.max(prev - 0.15, 0.4));
 

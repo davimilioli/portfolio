@@ -42,7 +42,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                 return <code className={className} {...props}>{children}</code>;
             }
             return (
-                <code className="px-1.5 py-0.5 rounded-md bg-neutral-100 border border-neutral-200 text-neutral-800 text-[0.8em] font-mono" {...props}>
+                <code className="px-1.5 py-0.5 rounded-md bg-neutral-100 border border-neutral-200 text-neutral-800 text-xs font-mono" {...props}>
                     {children}
                 </code>
             );

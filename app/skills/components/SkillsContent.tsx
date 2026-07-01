@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Badge from '@/components/ui/Badge';
 import { categoriesSkills, skills } from '@/data/skills';
 import Heading from '@/components/ui/Heading';
-import SkillCard from '@/components/home/skills/SkillCard';
+import SkillCard from './SkillCard';
 import Button from '@/components/ui/Button';
 
 export default function SkillsContent() {

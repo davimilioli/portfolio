@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
+import ScrollNavigator from "@/components/layout/ScrollNavigator";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -56,11 +57,18 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${plusJakartaSans.variable} h-full antialiased dark`}>
       <body className="font-sans" suppressHydrationWarning>
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <div className="flex flex-1 min-h-screen">
+          <Sidebar className="hidden lg:flex" />
+          <div className="flex-1 flex flex-col min-w-0">
+            <Header />
+            <div className="flex-1 flex flex-col">
+              <main className="flex-1">
+                {children}
+              </main>
+            </div>
+          </div>
+        </div>
+        <ScrollNavigator />
       </body>
     </html>
   );

@@ -6,7 +6,7 @@ import { HiCheck, HiOutlineDocumentText } from 'react-icons/hi';
 import Badge from '@/components/ui/Badge';
 import Heading from '@/components/ui/Heading';
 import Button from '@/components/ui/Button';
-import ResumeViewerModal from '@/components/home/modal-viewer/ResumeViewerModal';
+import ResumeViewerModal from '@/components/modal-viewer/ResumeViewerModal';
 
 export default function AboutDescription() {
     const highlights = [

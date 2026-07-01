@@ -5,9 +5,9 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import Badge from '@/components/ui/Badge';
 import Container from '@/components/ui/Container';
 import Heading from '@/components/ui/Heading';
-import ProjectsContent from '@/components/home/projects/ProjectsContent';
+import ProjectsContent from './ProjectsContent';
 
-export default function Projects() {
+export default function ProjectsPageContent() {
     const sectionRef = useRef<HTMLDivElement>(null);
 
     const { scrollYProgress } = useScroll({
@@ -20,10 +20,10 @@ export default function Projects() {
     const opacity = useTransform(scrollYProgress, [0, 0.5], [0.6, 1]);
 
     return (
-        <div ref={sectionRef} className="bg-neutral-50">
+        <div ref={sectionRef} className="bg-neutral-50 min-h-screen">
             <motion.section
                 style={{ scale, borderRadius, opacity }}
-                className="w-full bg-neutral-50 text-neutral-900 py-16 md:py-24 border-t border-neutral-200 relative overflow-hidden origin-top"
+                className="w-full min-h-screen bg-neutral-50 text-neutral-900 py-16 md:py-24 border-t border-neutral-200 relative overflow-hidden origin-top"
             >
                 <Container className="space-y-4 relative z-10">
                     <div className="mb-12 space-y-2">

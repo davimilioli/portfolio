@@ -1,14 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, useAnimationControls } from 'motion/react';
-import { HiOutlineDocumentText, HiArrowNarrowRight } from 'react-icons/hi';
+import { HiOutlineDocumentText, HiArrowNarrowRight, HiOutlineChevronDown, HiOutlineHand } from 'react-icons/hi';
 import Container from "@/components/ui/Container";
 import Button from '@/components/ui/Button';
-import ResumeViewerModal from '@/components/home/modal-viewer/ResumeViewerModal';
+import ResumeViewerModal from '@/components/modal-viewer/ResumeViewerModal';
 import Heading from '@/components/ui/Heading';
 
 export default function HeroContent() {
+    const router = useRouter();
     const containerVariants = {
         hidden: {},
         visible: {
@@ -135,7 +137,7 @@ export default function HeroContent() {
                                 Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.
                             </p>
                             <div className="shrink-0 flex flex-wrap gap-3">
-                                <Button variant="primary" onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}>
+                                <Button variant="primary" onClick={() => router.push('/contact')}>
                                     Contato
                                     <HiArrowNarrowRight className="w-4 h-4" />
                                 </Button>
@@ -147,6 +149,34 @@ export default function HeroContent() {
                         </motion.div>
                     </motion.div>
                 </Container>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.3, duration: 0.6 }}
+                    className="flex flex-col items-center gap-1.5 my-4 cursor-pointer"
+                    onClick={() => router.push('/about')}
+                >
+                    <span className="text-xs font-mono tracking-widest uppercase text-neutral-500 animate-pulse">
+                        Role para continuar
+                    </span>
+                    <div className="hidden md:block">
+                        <motion.div 
+                            animate={{ y: [0, 6, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                            <HiOutlineChevronDown className="w-5 h-5 text-indigo-500" />
+                        </motion.div>
+                    </div>
+                    <div className="md:hidden">
+                        <motion.div
+                            animate={{ y: [6, -6, 6], opacity: [0.3, 1, 0.3] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                            <HiOutlineHand className="w-5 h-5 text-indigo-500" />
+                        </motion.div>
+                    </div>
+                </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
