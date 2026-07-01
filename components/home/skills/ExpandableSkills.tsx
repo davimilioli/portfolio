@@ -3,15 +3,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Button from '@/components/ui/Button';
-import { skills } from '@/data/skills';
+import { categoriesSkills, skills } from '@/data/skills';
 import SkillCard from '@/components/home/skills/SkillCard';
 
-
-const categoryLabels: Record<string, string> = {
-    'front-end': 'Front-End',
-    'back-end': 'Back-End',
-    'tools': 'Ferramentas'
-};
 
 export default function ExpandableSkills() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -29,7 +23,7 @@ export default function ExpandableSkills() {
                         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
                     >
                         {skills.slice(6).map((skillItem, index) => {
-                            const categoryLabel = categoryLabels[skillItem.category] || skillItem.category;
+                            const categoryLabel = categoriesSkills[skillItem.category] || skillItem.category;
                             return (
                                 <motion.div
                                     key={skillItem.id}

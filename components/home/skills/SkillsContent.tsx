@@ -3,17 +3,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Badge from '@/components/ui/Badge';
-import { skills } from '@/data/skills';
+import { categoriesSkills, skills } from '@/data/skills';
 import Heading from '@/components/ui/Heading';
 import SkillCard from '@/components/home/skills/SkillCard';
 import Button from '@/components/ui/Button';
 
 export default function SkillsContent() {
-    const categoryLabels: Record<string, string> = {
-        'front-end': 'Front-End',
-        'back-end': 'Back-End',
-        'tools': 'Ferramentas'
-    };
 
     const containerVariants = {
         hidden: {},
@@ -69,7 +64,7 @@ export default function SkillsContent() {
             >
                 <div className="grid grid-cols-2 lg:grid-cols-3">
                     {skills.slice(0, 6).map((skillItem) => {
-                        const categoryLabel = categoryLabels[skillItem.category] || skillItem.category;
+                        const categoryLabel = categoriesSkills[skillItem.category] || skillItem.category;
                         return (
                             <motion.div key={skillItem.id} variants={cardVariants}>
                                 <SkillCard
@@ -94,7 +89,7 @@ export default function SkillsContent() {
                         >
                             <div className="grid grid-cols-2 lg:grid-cols-3">
                                 {skills.slice(6).map((skillItem, index) => {
-                                    const categoryLabel = categoryLabels[skillItem.category] || skillItem.category;
+                                    const categoryLabel = categoriesSkills[skillItem.category] || skillItem.category;
                                     return (
                                         <motion.div
                                             key={skillItem.id}
