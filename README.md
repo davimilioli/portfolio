@@ -29,7 +29,7 @@
 
 ###
 
-<p align="left">Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.<br><br>- 🔭 Hoje atuo construindo sites, sistemas e aplicações eficientes<br>- 📚 Atualmente focado em aprimorar minhas habilidades com a stack moderna do ecossistema React/Next.js<br>- ⚡ No tempo livre me dedico a evoluir tecnicamente, criando projetos pessoais e estudos de caso</p>
+<p align="left">Sou um Desenvolvedor Front-End dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.<br><br>- 🔭 Hoje atuo construindo sites, sistemas e aplicações eficientes<br>- 📚 Atualmente focado em aprimorar minhas habilidades com a stack moderna do ecossistema React/Next.js<br>- ⚡ No tempo livre me dedico a evoluir tecnicamente, criando projetos pessoais e estudos de caso</p>
 
 ###
 

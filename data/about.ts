@@ -5,10 +5,10 @@ import { SiGithub, SiInstagram } from "react-icons/si";
 
 export const aboutInfo: AboutInfo = {
   personalData: {
-    role: "Desenvolvedor Full-Stack",
+    role: "Desenvolvedor Front-End",
     email: "davimilioli2108@gmail.com",
     whatsapp: "(21) 99213-3618",
-    bio: "Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente e aprimorar meus conhecimentos.",
+    bio: "Sou um Desenvolvedor Front-End dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente e aprimorar meus conhecimentos.",
     socials: [
       { icon: SlSocialLinkedin, name: 'Linkedin', link: 'https://www.linkedin.com/in/davimilioli/' },
       { icon: SiGithub, name: 'Github', link: 'https://github.com/davimilioli' },
@@ -19,7 +19,7 @@ export const aboutInfo: AboutInfo = {
     {
       id: 1,
       period: "2022 — Atualmente",
-      title: "Desenvolvedor Full-Stack",
+      title: "Desenvolvedor Front-End",
       company: "Inforce Tecnologia",
       description: [
         "Desenvolvimento e manutenção de sites e aplicações web utilizando HTML, CSS, SASS, JavaScript, TypeScript, jQuery, PHP, React, Next.js e Node.js.",

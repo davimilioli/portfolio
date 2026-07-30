@@ -37,7 +37,7 @@ export default function AboutDescription() {
                 </div>
 
                 <p className="text-neutral-400 leading-relaxed text-base">
-                    Desenvolvedor Full-Stack com foco em criar experiências digitais que combinam bom design com código sólido.
+                    Desenvolvedor Front-End com foco em criar experiências digitais que combinam bom design com código sólido.
                 </p>
 
                 <ul className="space-y-3">

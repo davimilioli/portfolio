@@ -117,7 +117,7 @@ export default function HeroContent() {
                                     Disponível para novos projetos
                                 </span>
                                 <span className="text-neutral-300 dark:text-neutral-700">{"//"}</span>
-                                <span className="tracking-widest uppercase text-xs text-neutral-400">DEV FULL-STACK <span className="w-1 h-1 rounded-full bg-neutral-400 inline-block" />  2026</span>
+                                <span className="tracking-widest uppercase text-xs text-neutral-400">DEV Front-End <span className="w-1 h-1 rounded-full bg-neutral-400 inline-block" />  2026</span>
                             </div>
                         </motion.div>
 
@@ -132,7 +132,7 @@ export default function HeroContent() {
 
                         <motion.div variants={itemVariants} className="flex flex-col items-start gap-6 max-w-2xl">
                             <p className="text-base text-neutral-500 dark:text-neutral-400 leading-relaxed flex-1">
-                                Sou um Desenvolvedor Full-Stack dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.
+                                Sou um Desenvolvedor Front-End dedicado a transformar ideias em soluções digitais por meio de habilidades técnicas e criatividade. Estou sempre em busca de novos desafios e oportunidades para evoluir profissionalmente.
                             </p>
                             <div className="shrink-0 flex flex-wrap gap-3">
                                 <Button variant="primary" onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}>
