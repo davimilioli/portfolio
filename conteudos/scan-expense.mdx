@@ -1,0 +1,250 @@
+export const metadata = {
+    id: 8,
+    name: 'ScanExpense',
+    img: ['/projetcs/scan-expense/tela-inicial.png'],
+    github: 'https://github.com/davimilioli/scan-expense',
+    category: 'app-web',
+    technologies: ['NextJs', 'React', 'TypeScript', 'Tailwind', 'Claude'],
+}
+
+ScanExpense é um extrator inteligente de despesas. A partir da foto de um recibo, nota fiscal ou comprovante Pix, uma IA com visão identifica o estabelecimento, a data, a categoria, o valor total e cada item da compra. O usuário revisa e corrige os dados num formulário com validação em tempo real e pode copiar o resultado em texto ou JSON ou exportar um CSV pronto para o Excel. Tudo acontece em uma única tela, sem cadastro, com o histórico salvo no próprio navegador.
+
+A extração usa a API do **Google Gemini** pelo **Vercel AI SDK**, com saída estruturada: um único schema **Zod** define o formato que a IA deve devolver, valida o formulário de edição e gera os tipos do TypeScript. A chamada roda em uma **Server Action**, então a chave da API nunca chega ao navegador. Antes do envio, a imagem é comprimida no próprio navegador para reduzir o tempo de resposta e o custo de cada chamada.
+
+## Como funciona
+
+1. O usuário arrasta ou seleciona a imagem do recibo e vê a pré-visualização na hora.
+2. A imagem é comprimida no navegador e enviada para a Server Action.
+3. O Gemini lê a imagem e devolve os dados no formato do schema. Imagens que não são recibos são recusadas, em vez de a IA inventar dados.
+4. Os dados aparecem num card editável, com a tabela de itens e o recálculo automático do valor total.
+5. A extração vai para o histórico local (Zustand + localStorage) e pode ser exportada em CSV, JSON ou texto.
+
+## Planejamento: do brain-dump ao PRD
+
+O projeto começou com um **brain-dump em Markdown**: um arquivo curto com a ideia, o fluxo da tela e as decisões técnicas iniciais. A partir dele, com o apoio do **Claude Code**, gerei um **PRD** (documento de requisitos do produto) com objetivos, escopo, modelo de dados, requisitos funcionais, riscos e a divisão da implementação em **8 fases e 18 tarefas** em ordem progressiva, cada uma com um critério de aceite.
+
+A implementação seguiu o PRD fase por fase: a cada tarefa concluída, o item era marcado e qualquer desvio do plano era registrado no próprio documento. Por fim, consolidei a arquitetura, as decisões não óbvias e as convenções em um arquivo de contexto (`AGENTS.md`), que guia qualquer agente de IA que trabalhe no projeto. Os três arquivos estão disponíveis abaixo:
+
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+
+<SkillCard name="Brain-dump" buttonLabel="Ver brain-dump em Markdown" description="Ponto de partida do projeto: a ideia, o fluxo da tela e as decisões técnicas iniciais, escritos de forma livre.">
+
+````markdown
+# Projeto: Extrator Inteligente de Despesas / Recibos (Multimodal + JSON Mode)
+
+Uma tela limpa onde o usuário arrasta uma imagem de recibo/nota (ou comprovante Pix) e a IA extrai os dados estruturados instantaneamente.
+
+
+## Aspectos Técnicos
+
+Projeto feito em Next.js + React + TailwindCSS
+Terá validação do zod
+Todos os components salvos na pasta src/components
+O histórico dos dados deve estar em local storage (usar o zustand)
+
+## Aspectos Visuais
+- Precisa ser um layout clean
+- Estilização com Tailwind
+
+## O fluxo
+
+1. Input de upload de imagem (<input type="file"> com preview imediato).
+
+2. Server Action envia a imagem para o modelo com visão (ex: generateObject do Vercel AI SDK com schema Zod).
+
+3. A interface renderiza uma tabela/card editável com os campos extraídos: Estabelecimento, Data, Categoria, Valor Total e Itens discriminados.
+
+4. Botão "Copiar JSON" ou "Exportar CSV".
+````
+
+</SkillCard>
+
+<SkillCard name="PRD: fases e tarefas" buttonLabel="Ver tarefas do PRD" description="As 8 fases e 18 tarefas da implementação, em ordem progressiva, com critérios de aceite e as anotações feitas durante o desenvolvimento.">
+
+````markdown
+## 8. Tarefas de implementação (ordem progressiva)
+
+Cada tarefa entrega algo verificável e depende só das anteriores.
+
+### Fase 0: Fundação
+
+**[x] T1. Dependências e configuração**
+- Instalar `ai`, `@ai-sdk/google`, `zod` e `zustand`.
+- Criar `.env.example` com `GOOGLE_GENERATIVE_AI_API_KEY=` e garantir que `.env*.local` esteja no `.gitignore`.
+- Configurar `serverActions.bodySizeLimit` no `next.config.ts` (conferir na documentação local).
+- ✅ Critério: o projeto sobe sem erros e as dependências constam no `package.json`.
+
+**[x] T2. Layout base**
+- Limpar o `page.tsx` e o `globals.css` do template, definir fonte, cores neutras e metadata (título "Scan Expense").
+- Estrutura da página: cabeçalho simples, área principal (upload + resultado) e área de histórico.
+- ✅ Critério: página limpa e responsiva com os blocos vazios posicionados.
+
+**[x] T3. Schema Zod e tipos**
+- Criar `src/lib/schemas/expense.ts` com o enum de categorias, `expenseItemSchema`, `expenseSchema` (com `.describe()`), os tipos inferidos e `HistoryEntry`.
+- Criar `src/lib/format.ts` (BRL e data ISO → pt-BR; o `<input type="date">` já trabalha em ISO, então não é preciso converter de volta).
+- ✅ Critério: tipos exportados sem erros de TypeScript.
+
+### Fase 1: Upload
+
+**[x] T4. Componente `ImageUploader`**
+- Arrastar e soltar + input de arquivo, preview, remover/trocar e validação de tipo e tamanho.
+- Estados visuais: vazio, arrastando por cima, com imagem e erro.
+- ✅ Critério: ao selecionar ou soltar uma imagem válida, o preview aparece. Arquivos inválidos mostram erro.
+
+**[x] T5. Utilitários de imagem (`src/lib/image.ts`)**
+- `compressImage(file) → Blob/File` (lado maior ≤ 1600px, JPEG 0.85).
+- `createThumbnail(file) → dataURL` (lado maior ≈ 200px, JPEG 0.7).
+- ✅ Critério: uma foto de celular (~4MB) vira um arquivo menor que 1MB e uma miniatura de ~20KB.
+
+### Fase 2: Extração com IA
+
+**[x] T6. Server Action `extractExpense`**
+- Implementado com `generateText` + `Output.object` (o `generateObject` está descontinuado no AI SDK 7) e o modelo `gemini-flash-lite-latest` (o `gemini-flash-latest` estava sobrecarregado). A IA também retorna `isReceipt` para sinalizar imagens que não são recibos.
+- `'use server'`. Recebe um `FormData` com a imagem, valida o tipo e o tamanho e chama o Gemini Flash via `generateObject` com o `expenseSchema` e um prompt de sistema em pt-BR (regras: data ISO, valores numéricos em reais, escolher a categoria mais próxima, itens vazios para comprovante Pix, erro quando não for recibo).
+- Retorna um resultado discriminado `{ ok, data | error }` e trata falhas da API e da validação.
+- ✅ Critério: com uma imagem de recibo real, retorna um objeto válido pelo schema. Com uma imagem aleatória, retorna um erro amigável.
+
+**T7. Integrar upload e extração**
+- Botão "Extrair dados", estado de carregamento (`useTransition` ou `useActionState`, conforme a documentação local) e exibição do erro.
+- ✅ Critério: o fluxo ponta a ponta mostra o JSON extraído (ainda sem o card) na tela.
+
+### Fase 3: Estado e histórico
+
+**[x] T8. Store Zustand (`src/store/expense-store.ts`)**
+- Implementado com `skipHydration` + o hook `useStoreHydration()`, que lê o localStorage só depois de montar no cliente. Só `entries` e `activeId` são persistidos.
+- Estado: `entries: HistoryEntry[]` e `activeId: string | null`.
+- Ações: `addEntry`, `updateExpense(id, expense)`, `removeEntry`, `clearHistory` e `setActive`.
+- `persist` com a chave `scan-expense-history`, tratamento de `QuotaExceededError` e controle de reidratação (`hasHydrated`).
+- ✅ Critério: as entradas sobrevivem a um reload da página e não há erro de hidratação.
+
+**[x] T9. Salvar a extração no histórico**
+- Depois de uma extração bem-sucedida, chamar `addEntry` (com a miniatura) e definir a entrada como ativa. O próprio `addEntry` já define a entrada nova como ativa.
+- ✅ Critério: cada extração gera uma nova entrada persistida.
+
+### Fase 4: Card editável
+
+**[x] T10. Componente `ExpenseCard`**
+- Campos Estabelecimento, Data, Categoria e Valor Total ligados à entrada ativa do store, com validação Zod por campo.
+- Implementado como conteúdo da aba "Texto". O formulário mantém um rascunho local e só grava no store quando o rascunho inteiro é válido pelo `expenseSchema`. As mensagens de erro em pt-BR ficam no próprio schema.
+- ✅ Critério: editar um campo atualiza o store e o valor persiste após o reload.
+
+**[x] T11. Componente `ExpenseItemsTable`**
+- Tabela editável de itens: adicionar e remover linhas, total da linha e aviso de divergência entre a soma dos itens e o Valor Total.
+- O total da linha é recalculado (quantidade × valor unitário) só quando um desses dois campos muda, para não apagar descontos lidos do recibo.
+- Ao adicionar, remover ou editar um item, o Valor Total passa a ser a soma dos itens. Quando a lista fica vazia, o valor atual é mantido.
+- Versão mobile: linhas empilhadas em cards.
+- ✅ Critério: é possível editar, adicionar e remover itens, e o aviso aparece quando os valores não batem.
+
+### Fase 5: Exportação
+
+**[x] T12. Utilitários de exportação (`src/lib/export.ts`)**
+- `toJson(expense)` e `toCsv(expense)` (`;`, BOM UTF-8, escape de aspas, uma linha por item) e `downloadFile(content, filename, mime)`.
+- Também tem `toText(expense)` e `getCsvFileName(expense)`. No CSV, números usam vírgula decimal e a data sai em dd/mm/aaaa, para o Excel pt-BR reconhecer os tipos.
+- ✅ Critério: o CSV gerado abre corretamente no Excel pt-BR, com acentos intactos.
+
+**[x] T13. Componente `ExportActions`**
+- Botões "Copiar JSON" (com feedback) e "Exportar CSV" (nome do arquivo: `despesa-<estabelecimento>-<data>.csv`), desabilitados quando os dados forem inválidos.
+- A cópia fica no modal do `ExportDialog` (botão "Ver e copiar resultado", com abas Texto/JSON). O `ExportActions` fica no fim do `ExpenseCard`, que é quem sabe se o formulário está válido.
+- ✅ Critério: as duas ações funcionam com os dados editados.
+
+### Fase 6: Histórico na interface
+
+**[x] T14. Componentes `HistoryList` e `HistoryItem`**
+- Lista com miniatura, estabelecimento, data e valor (BRL). Destaque da entrada ativa.
+- Clicar reabre a entrada no card. Excluir com confirmação. "Limpar histórico".
+- Estado vazio amigável.
+- ✅ Critério: é possível navegar entre as extrações salvas, editar, excluir e limpar.
+
+**[x] T15. Fluxo "Nova extração"**
+- Botão para voltar ao estado inicial (limpa o upload e desmarca a entrada ativa) sem perder o histórico.
+- O botão aparece no painel "Imagem" quando há uma entrada aberta. O upload é limpo recriando o `ImageUploader` via `key`.
+- ✅ Critério: é possível fazer várias extrações seguidas.
+
+### Fase 7: Acabamento
+
+**[x] T16. Polimento de UX e acessibilidade**
+- Skeleton durante a extração, foco e navegação por teclado, labels, contraste e mensagens de erro consistentes.
+- Revisar a responsividade (360px, tablet, desktop).
+- Feito: `ExtractionSkeleton` com `role="status"`, contorno de foco global em `:focus-visible` (`globals.css`) e textos auxiliares de `zinc-400` para `zinc-500`, para atingir o contraste AA.
+- ✅ Critério: o fluxo completo funciona só com o teclado e o layout fica íntegro em todos os tamanhos.
+
+**[x] T17. Validação final com casos reais**
+- Testar com: cupom fiscal de supermercado (muitos itens), recibo manuscrito, comprovante Pix (sem itens), foto torta ou com pouca luz e uma imagem que não é recibo.
+- Ajustar o prompt e as `.describe()` do schema conforme os resultados.
+- Validado com imagens **sintéticas** de cada cenário, com o mesmo schema, prompt e modelo da action. Todos os cenários extraíram os dados corretos (ou recusaram a imagem que não é recibo) entre 0,9s e 3,7s, sem precisar ajustar o prompt. Falta repetir com fotos reais.
+- ✅ Critério: extrações corretas ou falhas tratadas de forma amigável em todos os casos.
+
+### Fase 8: Limite de uso
+
+**[x] T18. Limite de 3 extrações por usuário**
+- Cada usuário pode fazer até 3 extrações. Depois disso, o botão "Extrair" fica bloqueado e a Server Action recusa o pedido sem chamar a IA.
+- Conta toda chamada que chega ao Gemini, inclusive falhas e imagens que não são recibos. Envios barrados pela validação de tipo ou tamanho não contam.
+- O contador fica num cookie `httpOnly` (`scan-expense-usage`, validade de 1 ano), assinado com HMAC-SHA256 usando `RATE_LIMIT_SECRET`. Um cookie adulterado ou inválido é tratado como limite atingido.
+- Limitação conhecida e aceita: limpar os cookies ou usar uma aba anônima reinicia a contagem. Para um bloqueio robusto seria preciso persistir no servidor (ex: IP + Upstash Redis).
+- A interface mostra quantas extrações restam (lidas por `getRemainingExtractions()` ao abrir a página) e o aviso de limite atingido.
+- ✅ Critério: a 4ª tentativa é recusada sem chamar a IA, e o contador sobrevive a um reload da página.
+````
+
+</SkillCard>
+
+<SkillCard name="Contexto do projeto" buttonLabel="Ver contexto em Markdown" description="Arquivo AGENTS.md com stack, arquivos principais, decisões não óbvias e convenções, usado para orientar agentes de IA no projeto.">
+
+````markdown
+## Contexto do projeto
+
+**Scan Expense**: tela única em que o usuário envia a foto de um recibo, nota fiscal ou comprovante Pix, a IA extrai os dados (estabelecimento, data, categoria, valor total e itens), o usuário revisa e edita, e então copia como texto/JSON ou exporta CSV. O histórico fica no localStorage, sem backend nem login.
+
+O planejamento e o status das tarefas ficam em `.docs/prd.md`. Ao concluir uma tarefa do PRD, marque-a com `[x]` e anote qualquer desvio do plano original.
+
+### Stack
+
+- Next.js 16 (App Router, código em `src/`, alias `@/*` → `src/*`) + React 19 + Tailwind CSS v4
+- Vercel AI SDK 7 (`ai`) + `@ai-sdk/google`, modelo `gemini-flash-lite-latest`
+- Zod 4 para validação e Zustand 5 (`persist`) para o estado
+- Variáveis no arquivo `.env`, que não é versionado: `GOOGLE_GENERATIVE_AI_API_KEY` (chave do Gemini) e `RATE_LIMIT_SECRET` (chave que assina o cookie do limite de uso)
+
+### Fluxo e arquivos principais
+
+- `src/components/expense-extractor.tsx`: orquestra o fluxo. Comprime a imagem, chama a Server Action e salva o resultado no histórico.
+- `src/actions/extract-expense.ts`: Server Action que valida a imagem e chama o Gemini. Retorna `{ ok: true, data } | { ok: false, error }` e nunca lança erro para o cliente.
+- `src/lib/schemas/expense.ts`: o `expenseSchema` é a fonte única de verdade. Serve à IA (pelos `.describe()`), ao formulário (pelas mensagens de erro em pt-BR) e aos tipos.
+- `src/store/expense-store.ts`: histórico com `persist` + `skipHydration`. Componentes que leem o store devem usar `useStoreHydration()` e só renderizar os dados depois que ele retornar `true`, para evitar erro de hidratação.
+- `src/components/expense-card.tsx` + `expense-items-table.tsx`: formulário editável com um rascunho local. Só grava no store quando o rascunho inteiro é válido, e também controla se a exportação fica habilitada.
+- `src/lib/export.ts`: `toText`, `toJson`, `toCsv` e `downloadFile`. `src/lib/image.ts`: compressão e miniatura via canvas.
+
+### Decisões que não são óbvias
+
+- **`generateObject` está descontinuado no AI SDK 7.** Use `generateText` + `Output.object({ schema })`.
+- **Limite de uso:** cada usuário pode fazer até 3 chamadas à IA (`src/lib/rate-limit.ts`). O contador fica num cookie `httpOnly` assinado com HMAC e é consumido antes de chamar o Gemini. Limpar os cookies reinicia a contagem, e essa limitação foi aceita. O `rate-limit.ts` usa `node:crypto` e `next/headers`, então só pode ser importado no servidor.
+- **Imagens que não são recibos:** a IA responde `{ isReceipt, expense | null }`, assim ela recusa a imagem em vez de inventar dados.
+- **Limite de tamanho:** o Server Action aceita até `5mb` (`experimental.serverActions.bodySizeLimit`). A imagem é comprimida no cliente antes do envio (lado maior até 1600px, JPEG).
+- **Campos numéricos do formulário:** ficam como texto no rascunho. `parseDecimal("")` retorna `NaN` para o Zod acusar o campo vazio.
+- **Totais:** o total da linha só é recalculado quando a quantidade ou o valor unitário mudam, para preservar descontos lidos do recibo. O valor total acompanha a soma dos itens quando a lista é alterada.
+- **CSV para Excel pt-BR:** separador `;`, BOM UTF-8, vírgula decimal e data em dd/mm/aaaa.
+- **`<dialog>`:** precisa de `m-auto`, porque o reset do Tailwind remove a margem que o centraliza.
+
+### Convenções
+
+- Interface e mensagens em português. Valores em BRL.
+- Não escreva comentários no código. As decisões não óbvias ficam registradas nesta seção e no PRD.
+- Código simples e enxuto. Nomes por extenso, sem `_` em callbacks (`.map((item) => ...)`).
+- Componentes em `src/components` (arquivos em kebab-case, props em `interface`).
+- Classes Tailwind repetidas viram constante ou componente (`INPUT_CLASS_NAME`, `SECONDARY_BUTTON_CLASS_NAME`, `Panel`, `FormField`).
+- Destaque de cor único: `emerald`. Textos auxiliares em `zinc-500` ou mais escuro, por contraste.
+- Valide com `npx tsc --noEmit` e `npx eslint src`. Não rode `npm run dev`, `build` nem `start`, e não faça commit sem pedido explícito.
+````
+
+</SkillCard>
+
+</div>
+
+## Destaques
+
+- Extração de dados de recibos, notas fiscais e comprovantes Pix com IA
+- Saída estruturada validada por schema Zod, compartilhado entre a IA, o formulário e os tipos
+- Edição dos dados com validação em tempo real e aviso quando a soma dos itens não bate com o total
+- Recálculo automático do total da linha e do valor total
+- Exportação em CSV (pronto para o Excel em português), JSON e texto
+- Histórico local com miniaturas, persistido com Zustand
+- Limite de 3 extrações por usuário com cookie assinado (HMAC), para evitar abuso da API de IA
+- Interface responsiva e acessível, com navegação por teclado, foco visível e contraste AA

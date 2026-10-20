@@ -144,6 +144,29 @@ const projectsData: Project[] = [
         ],
         technologies: ['NextJs', 'React', 'TypeScript', 'Tailwind', 'MCP', 'Figma', 'Antigravity', 'Claude'],
     },
+    {
+        id: 8,
+        name: 'ScanExpense',
+        img: [
+            '/projetcs/scan-expense/tela-inicial.png',
+            '/projetcs/scan-expense/extracao.png',
+            '/projetcs/scan-expense/itens-exportacao.png',
+        ],
+        imagesPosition: 'top',
+        description: 'ScanExpense é um extrator inteligente de despesas: a partir da foto de um recibo, nota fiscal ou comprovante Pix, uma IA com visão (Google Gemini, via Vercel AI SDK) identifica estabelecimento, data, categoria, valor total e itens da compra. O projeto foi planejado a partir de um brain-dump em Markdown, transformado em um PRD com fases e tarefas progressivas, e implementado com apoio do Claude Code, usando Zod para validar a saída da IA e Zustand para o histórico local.',
+        github: 'https://github.com/davimilioli/scan-expense',
+        category: 'app-web',
+        features: [
+            'Extração de dados de recibos e comprovantes Pix com IA',
+            'Saída estruturada validada por schema Zod',
+            'Edição dos dados com validação em tempo real',
+            'Recálculo automático do valor total pelos itens',
+            'Exportação em CSV, JSON e texto',
+            'Histórico local com miniaturas',
+            'Limite de uso por usuário com cookie assinado',
+        ],
+        technologies: ['NextJs', 'React', 'TypeScript', 'Tailwind', 'Claude'],
+    },
 ];
 
 export const projects: Project[] = [...projectsData].reverse();
