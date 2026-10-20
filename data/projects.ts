@@ -148,9 +148,10 @@ const projectsData: Project[] = [
         id: 8,
         name: 'ScanExpense',
         img: [
-            '/projetcs/scan-expense/tela-inicial.png',
-            '/projetcs/scan-expense/extracao.png',
-            '/projetcs/scan-expense/itens-exportacao.png',
+            '/projetcs/scan-expense/01-tela-inicial.png',
+            '/projetcs/scan-expense/02-imagem-enviada.png',
+            '/projetcs/scan-expense/03-dados-extraidos.png',
+            '/projetcs/scan-expense/04-historico.png',
         ],
         imagesPosition: 'top',
         description: 'ScanExpense é um extrator inteligente de despesas: a partir da foto de um recibo, nota fiscal ou comprovante Pix, uma IA com visão (Google Gemini, via Vercel AI SDK) identifica estabelecimento, data, categoria, valor total e itens da compra. O projeto foi planejado a partir de um brain-dump em Markdown, transformado em um PRD com fases e tarefas progressivas, e implementado com apoio do Claude Code, usando Zod para validar a saída da IA e Zustand para o histórico local.',
