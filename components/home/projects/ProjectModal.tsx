@@ -63,6 +63,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     const next = () => goTo(imgIndex + 1, 1);
 
     const ProjectContent = project ? projectContent[project.id] : undefined;
+    const hasImages = !!project?.img?.length;
+    const isImagesOnTop = project?.imagesPosition === 'top';
 
     if (!mounted) return null;
 
@@ -111,8 +113,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                 </Button>
                             </div>
 
-                            <div className="overflow-y-auto md:overflow-hidden md:min-h-0 flex-1 p-5 sm:p-8">
-                                <div className={`grid grid-cols-1 ${project.img && project.img.length > 0 ? 'md:grid-cols-2' : ''} gap-6 md:gap-8 items-start md:h-full`}>
+                            <div className={`overflow-y-auto flex-1 p-5 sm:p-8 ${isImagesOnTop ? '' : 'md:overflow-hidden md:min-h-0'}`}>
+                                <div className={`grid grid-cols-1 gap-6 md:gap-8 items-start ${isImagesOnTop ? '' : 'md:h-full'} ${hasImages && !isImagesOnTop ? 'md:grid-cols-2' : ''}`}>
                                     {project.img && project.img.length > 0 && (
                                         <div className="space-y-3">
                                             <div
@@ -143,8 +145,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                                                 src={project.img[imgIndex]}
                                                                 alt={`${project.name} screenshot ${imgIndex + 1}`}
                                                                 fill
-                                                                sizes="(max-width: 768px) 100vw, 512px"
-                                                                className="object-cover"
+                                                                sizes={isImagesOnTop ? '(max-width: 896px) 100vw, 832px' : '(max-width: 768px) 100vw, 512px'}
+                                                                className={isImagesOnTop ? 'object-contain' : 'object-cover'}
                                                             />
                                                         )}
                                                     </motion.div>
@@ -191,7 +193,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                             )}
                                         </div>
                                     )}
-                                    <div className="space-y-6 md:h-full md:overflow-y-auto md:pr-4">
+                                    <div className={`space-y-6 ${isImagesOnTop ? '' : 'md:h-full md:overflow-y-auto md:pr-4'}`}>
                                         {ProjectContent && <ProjectContent />}
 
                                         <div className="space-y-3">

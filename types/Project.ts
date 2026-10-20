@@ -5,6 +5,7 @@ export type SkillName = typeof skills[number]['skill']
 export interface Project {
     id: number;
     img?: string[];
+    imagesPosition?: 'side' | 'top';
     name: string;
     description: string;
     github?: string;
