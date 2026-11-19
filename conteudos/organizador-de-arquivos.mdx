@@ -1,0 +1,27 @@
+export const metadata = {
+    id: 10,
+    name: 'Organizador de Arquivos',
+    github: 'https://github.com/davimilioli/file-organizer',
+    category: 'automation',
+    technologies: ['Python'],
+}
+
+Mini projeto em **Python** que organiza automaticamente os arquivos da pasta `Downloads`, movendo cada um para uma subpasta de acordo com a extensão: imagens, documentos, vídeos, software e outros. Foi criado para praticar a automação de tarefas repetitivas com arquivos e pastas, usando apenas o módulo `os` da biblioteca padrão.
+
+## Como funciona
+
+1. O script verifica se a pasta `Downloads` existe.
+2. Cria as subpastas `images`, `docs`, `videos`, `software` e `others` que ainda não existirem.
+3. Lista os arquivos da pasta e identifica a extensão de cada um.
+4. Move cada arquivo para a subpasta da sua categoria. Extensões que não estão em nenhuma categoria vão para `others`.
+
+## O que aprendi
+
+- Automatizar tarefas repetitivas com arquivos e pastas
+- Listar os arquivos de uma pasta
+- Verificar se uma pasta ou arquivo existe antes de usá-lo
+- Criar pastas pelo código
+- Montar caminhos que funcionam em qualquer sistema operacional
+- Identificar a extensão de um arquivo
+- Mover arquivos entre pastas
+- Usa uma lista para ligar cada categoria às suas extensões

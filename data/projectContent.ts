@@ -8,6 +8,7 @@ import PauloMartinsContent from '@/conteudos/paulo-martins-consultoria.mdx';
 import FrameworkContent from '@/conteudos/framework-multi-temas-white-label.mdx';
 import ScanExpenseContent from '@/conteudos/scan-expense.mdx';
 import DjangoContactFormContent from '@/conteudos/formulario-de-contato-django.mdx';
+import FileOrganizerContent from '@/conteudos/organizador-de-arquivos.mdx';
 
 export const projectContent: Record<number, MDXContent> = {
     1: UnycallContent,
@@ -19,4 +20,5 @@ export const projectContent: Record<number, MDXContent> = {
     7: FrameworkContent,
     8: ScanExpenseContent,
     9: DjangoContactFormContent,
+    10: FileOrganizerContent,
 };

@@ -4,6 +4,7 @@ export const categoryConfig: Record<string, { label: string; className: string }
     website: { label: 'Website', className: 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20' },
     'app-web': { label: 'Aplicação Web', className: 'text-indigo-400 bg-indigo-400/10 border-indigo-400/20' },
     'app-mobile': { label: 'App Mobile', className: 'text-purple-400 bg-purple-400/10 border-purple-400/20' },
+    automation: { label: 'Automação', className: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20' },
 };
 
 export function getCategoryLabel(category: string) {
@@ -188,6 +189,22 @@ const projectsData: Project[] = [
         ],
         technologies: ['Python'],
     },
+    {
+        id: 10,
+        name: 'Organizador de Arquivos',
+        description: 'Mini projeto em Python que organiza automaticamente os arquivos da pasta Downloads, movendo cada um para uma subpasta de acordo com a extensão: imagens, documentos, vídeos, software e outros. Criado para praticar a automação de tarefas repetitivas com arquivos e pastas.',
+        github: 'https://github.com/davimilioli/file-organizer',
+        category: 'automation',
+        features: [
+            'Organização automática por extensão do arquivo',
+            'Criação das subpastas que ainda não existem',
+            'Categorias para imagens, documentos, vídeos e software',
+            'Arquivos sem categoria movidos para "others"',
+            'Categorias e extensões fáceis de personalizar',
+            'Caminhos compatíveis com qualquer sistema operacional',
+        ],
+        technologies: ['Python'],
+    },
 ];
 
 export const projects: Project[] = [...projectsData].reverse();
@@ -197,4 +214,5 @@ export const categoriesProject: CategoryProject[] = [
     { category: 'website', label: 'Websites' },
     { category: 'app-web', label: 'Aplicações Web' },
     { category: 'app-mobile', label: 'Aplicações Mobile' },
+    { category: 'automation', label: 'Automações' },
 ];
