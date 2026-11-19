@@ -1,0 +1,29 @@
+export const metadata = {
+    id: 9,
+    name: 'Formulário de Contato com Django',
+    github: 'https://github.com/davimilioli/django-contact-form',
+    category: 'website',
+    technologies: ['Python'],
+}
+
+Mini projeto de envio de formulário de contato desenvolvido com **Python** e **Django**, criado para praticar o uso de formulários no framework. O usuário preenche nome, e-mail e mensagem, os dados são validados no servidor e, se estiverem corretos, ele é redirecionado para uma página de agradecimento.
+
+## Como funciona
+
+1. O usuário acessa a página e preenche o formulário.
+2. Ao enviar, o Django valida os campos obrigatórios, o formato do e-mail e o tamanho mínimo do nome.
+3. Se houver erro, o formulário volta com mensagens em português em cada campo.
+4. Se estiver tudo certo, os dados são exibidos no terminal e o usuário é redirecionado para a página `/obrigado/`.
+
+## O que aprendi
+
+- Criar um projeto e um app com Django
+- Criar formulários com a classe `forms.Form`
+- Validar campos e personalizar mensagens de erro
+- Criar validações próprias com métodos `clean_<campo>`
+- Tratar requisições `GET` e `POST` na mesma view
+- Redirecionar o usuário após o envio com `redirect`
+- Organizar rotas com `path` e `include`
+- Guardar configurações sensíveis no `.env` com `python-decouple`
+
+> Por enquanto, as mensagens não são salvas no banco de dados. O salvamento ainda será implementado.

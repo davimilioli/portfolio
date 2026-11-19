@@ -7,6 +7,7 @@ import MistContent from '@/conteudos/mist-previsao-do-tempo.mdx';
 import PauloMartinsContent from '@/conteudos/paulo-martins-consultoria.mdx';
 import FrameworkContent from '@/conteudos/framework-multi-temas-white-label.mdx';
 import ScanExpenseContent from '@/conteudos/scan-expense.mdx';
+import DjangoContactFormContent from '@/conteudos/formulario-de-contato-django.mdx';
 
 export const projectContent: Record<number, MDXContent> = {
     1: UnycallContent,
@@ -17,4 +18,5 @@ export const projectContent: Record<number, MDXContent> = {
     6: PauloMartinsContent,
     7: FrameworkContent,
     8: ScanExpenseContent,
+    9: DjangoContactFormContent,
 };

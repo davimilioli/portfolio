@@ -172,6 +172,22 @@ const projectsData: Project[] = [
         ],
         technologies: ['NextJs', 'React', 'TypeScript', 'Tailwind', 'Claude'],
     },
+    {
+        id: 9,
+        name: 'Formulário de Contato com Django',
+        description: 'Mini projeto de envio de formulário de contato desenvolvido com Python e Django, criado para praticar o uso de formulários no framework. O usuário preenche nome, e-mail e mensagem, os dados são validados no servidor com mensagens de erro em português e, se estiverem corretos, ele é redirecionado para uma página de agradecimento.',
+        github: 'https://github.com/davimilioli/django-contact-form',
+        category: 'website',
+        features: [
+            'Formulário com nome, e-mail e mensagem',
+            'Validação de campos obrigatórios e formato de e-mail',
+            'Validação personalizada do tamanho do nome',
+            'Mensagens de erro em português',
+            'Redirecionamento para página de agradecimento',
+            'Configurações sensíveis no .env com python-decouple',
+        ],
+        technologies: ['Python'],
+    },
 ];
 
 export const projects: Project[] = [...projectsData].reverse();
